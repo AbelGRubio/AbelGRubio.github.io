@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
     } catch (error) {
       document.querySelector(".loading").style.display = "none"; // Ocultar "Loading"
       document.querySelector(".error-message").innerHTML =
-        `Error: ${error.message}`;
+        `Error: Please send a message to a.grubio@hotmail.com [${error.message}]`;
       document.querySelector(".error-message").style.display = "block";
     }
   });
