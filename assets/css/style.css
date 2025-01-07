@@ -14,12 +14,14 @@
   --var-color-blue-02: #067ded; 
   --var-color-blue-03-hover: #195a8ca1; /*#0678e3*/
   --var-color-gray-01: #45505b;
+   scrollbar-width: thin;
 }
 
 
 body {
   font-family: "Open Sans", sans-serif;
   color: #272829;
+
 }
 
 a {
