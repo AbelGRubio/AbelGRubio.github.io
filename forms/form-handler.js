@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
     try {
       // Realiza la solicitud POST a la API
 
-      const response = await fetch("http://localhost:10000/send-email", {
+      const response = await fetch("https://api-send-message-ogmz.onrender.com/send-email", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
