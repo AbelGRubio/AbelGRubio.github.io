@@ -66,13 +66,18 @@ jobs:
           # Upload entire repository
           name: 'github-pages'
           path: '.'
-          exclude: |
-            .git/
-            node_modules/
-            .github/
-      
+    
+      - name: Create clean directory
+        run: |
+          mkdir clean_build
+          rsync -a --copy-links --exclude='.git' --exclude='node_modules' ./ clean_build/
+
+            
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        with: 
-          artifact_url: ${{ steps.upload-artifact.outputs.artifact_url }}  # Referencia al artefacto subido
+        with:
+          name: 'github-pages'
+          path: 'clean_build'     
+
+          
