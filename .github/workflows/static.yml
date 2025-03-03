@@ -45,12 +45,27 @@ jobs:
               
       - name: Setup Pages
         uses: actions/configure-pages@v4
+      # **Verificación antes de subir el artifacto**
+      - name: Verify no symlinks or hard links before uploading
+        run: |
+          echo "Checking for symlinks..."
+          if find . -type l | grep .; then
+            echo "ERROR: Symlinks detected!"; exit 1;
+          fi
+
+          echo "Checking for hard links..."
+          if find . -type f -links +1 | grep .; then
+            echo "ERROR: Hard links detected!"; exit 1;
+          fi
+          
+          echo "No symlinks or hard links detected. Proceeding with upload."
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           # Upload entire repository
           name: 'github-pages'
           path: '.'
+      
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
