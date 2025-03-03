@@ -66,6 +66,10 @@ jobs:
           # Upload entire repository
           name: 'github-pages'
           path: '.'
+          exclude: |
+            .git/
+            node_modules/
+            .github/
       
       - name: Deploy to GitHub Pages
         id: deployment
