@@ -60,6 +60,7 @@ jobs:
           
           echo "No symlinks or hard links detected. Proceeding with upload."
       - name: Upload artifact
+        id: upload-artifact
         uses: actions/upload-artifact@v4
         with:
           # Upload entire repository
@@ -70,4 +71,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
         with: 
-          artifact_name: 'github-pages'
+          artifact_url: ${{ steps.upload-artifact.outputs.artifact_url }}  # Referencia al artefacto subido
