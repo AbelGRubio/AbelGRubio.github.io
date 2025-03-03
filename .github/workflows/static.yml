@@ -30,7 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Eliminar symlinks y hard links
       - name: Remove symlinks and hard links
@@ -44,7 +44,7 @@ jobs:
           find . -type f -links +1 -exec rm {} \;
               
       - name: Setup Pages
-        uses: actions/configure-pages@v3
+        uses: actions/configure-pages@v5
       # **Verificación antes de subir el artifacto**
       - name: Verify no symlinks or hard links before uploading
         run: |
@@ -61,7 +61,7 @@ jobs:
           echo "No symlinks or hard links detected. Proceeding with upload."
       - name: Upload artifact
         id: upload-artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
           name: 'github-pages'
@@ -69,8 +69,7 @@ jobs:
             
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
         with:
           artifact_name: 'github-pages'
-          artifact_url: ${{ steps.upload-artifact.outputs.artifact_url }}  # Referencia al artefacto subido
 
