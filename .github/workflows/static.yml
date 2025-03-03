@@ -44,7 +44,7 @@ jobs:
           find . -type f -links +1 -exec rm {} \;
               
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v3
       # **Verificación antes de subir el artifacto**
       - name: Verify no symlinks or hard links before uploading
         run: |
