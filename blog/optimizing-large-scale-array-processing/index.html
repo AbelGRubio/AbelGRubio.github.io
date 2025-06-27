@@ -1,0 +1,224 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><!-- <meta name="generator" content={Astro.generator} /> --><link rel="canonical" href="https://agrubio.dev"><!-- <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "dd291c700634478e8e9835384fbf1a89"}'></script>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-43TSMZE2VS"></script>
+		<script id="google-analytics">
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'G-43TSMZE2VS');
+		</script> --><title>Full Stack Developer | React &amp; Python Optimization Expert</title><meta name="description" content="I'm agrubio, a full stack developer focused on code optimization, refactoring, and building scalable applications using Python and React. Check out my portfolio and recent work."><meta name="keywords" content="full stack developer, Python developer, React developer, code optimization, refactoring expert, performance engineering, web development, software development, software engineer, agrubio portfolio"><meta property="og:type" content="website"><meta property="og:url" content="https://agrubio.dev"><meta property="og:title" content="Full Stack Developer | React &#38; Python Optimization Expert"><meta property="og:description" content="I'm agrubio, a full stack developer focused on code optimization, refactoring, and building scalable applications using Python and React. Check out my portfolio and recent work."><meta property="og:image" content="https://agrubio.dev/images/tenweb_media_rczvprsdi.webp"><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://agrubio.dev"><meta property="twitter:title" content="Full Stack Developer | React &#38; Python Optimization Expert"><meta property="twitter:description" content="I'm agrubio, a full stack developer focused on code optimization, refactoring, and building scalable applications using Python and React. Check out my portfolio and recent work."><meta property="twitter:image" content="https://agrubio.dev/images/tenweb_media_rczvprsdi.webp"><meta name="author" content="agrubio"><meta name="publisher" content="agrubio.dev"><meta name="robots" content="index, follow"><link rel="stylesheet" href="/_astro/about.D3eBPi7K.css"></head> <body data-astro-cid-sckkx6r4> <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] lg:w-[80%] z-50 transition-all duration-300 rounded-2xl "> <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between"> <div class="flex-1"> <span id="item1" class="font-bold text-2xl"> <a href="/" title="Main page">Abel Garcia </a> </span> </div> <!-- Menú para Desktop --> <nav class="hidden md:flex space-x-6" id="main-nav"> <a href="/about" title="About me"> About me </a><a href="/blog" title="Blog"> Blog </a> </nav> <!-- Botón del menú móvil --> <button onclick="toggleMenu()" id="item2" class="md:hidden text-2xl" aria-label="Toggle menu"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <line x1="3" y1="12" x2="21" y2="12"></line> <line x1="3" y1="6" x2="21" y2="6"></line> <line x1="3" y1="18" x2="21" y2="18"></line> </svg> </button> </div> <!-- Menú móvil --> <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full shadow-lg rounded-2xl py-4 flex-col items-center space-y-4 
+    "> <nav class="flex flex-col space-y-4 text-center"> <a href="/about" title="About me" onclick="toggleMenu()" class=" "> About me </a><a href="/blog" title="Blog" onclick="toggleMenu()" class=" "> Blog </a> </nav> <!-- <div class="flex flex-col items-center mt-4 space-y-2 w-full">
+      <a href='/services' class={`${isHomePage ? 'btn-h-w' : 'btn-normal-pp btn-blue-400'} w-2/4 flex flex-col items-center`} 
+      onclick="toggleMenu()">
+        Get Started
+      </a>
+      <a href='/contact' class={`${isHomePage ? 'btn-h-w2' : 'btn-normal-pp btn-blue-400-reverse'} w-2/4 flex flex-col items-center`} 
+      onclick="toggleMenu()">
+        Contact Me
+      </a>
+    </div> --> </div> </header> <script>
+  let isOpen = false;
+  
+  function toggleMenu() {
+    isOpen = !isOpen;
+    const path = window.location.pathname;
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+    mobileMenu.classList.toggle('bg-white', true);
+
+  }
+
+  // Manejo del scroll
+  let isScrolled = false;
+  
+    const path = window.location.pathname;
+    const isHomePage = path === '/';
+          const item1 = document.getElementById('item1');
+   item1.classList.toggle('text-black', !isHomePage);
+   item1.classList.toggle('text-white', isHomePage);
+       const item2 = document.getElementById('item2');
+   item2.classList.toggle('text-black', !isHomePage);
+   item2.classList.toggle('text-white', isHomePage);
+        const navLinks = document.querySelectorAll('#main-nav a');
+    navLinks.forEach(link => {
+      link.classList.toggle('text-black', !isHomePage);
+      link.classList.toggle('text-white', isHomePage);
+    });
+
+
+  window.addEventListener('scroll', () => {
+    isScrolled = window.scrollY > 50;
+    const header = document.querySelector('header');
+    header.classList.toggle('scrolled', isScrolled);
+    header.classList.toggle('shadow-2xl', isScrolled);
+    header.classList.toggle('bg-white', isScrolled);
+
+
+    const path = window.location.pathname;
+    const isHomePage = path === '/';
+    if (isHomePage){
+          const item1 = document.getElementById('item1');
+    item1.classList.toggle('text-black', isScrolled);
+    item1.classList.toggle('text-white', !isScrolled);
+        const item2 = document.getElementById('item2');
+    item2.classList.toggle('text-black', isScrolled);
+    item2.classList.toggle('text-white', !isScrolled);
+    const navLinks = document.querySelectorAll('#main-nav a');
+    navLinks.forEach(link => {
+      link.classList.toggle('text-black', isScrolled);
+      link.classList.toggle('text-white', !isScrolled);
+    });
+    }
+
+  });
+</script>  <article class="pt-20 "> <div class="hero-image">  </div> <div class="prose prose-lg" id="blog"> <div class="title"> <div class="date"> <time datetime="2025-06-26T00:00:00.000Z"> Jun 26, 2025 </time>  </div> <h1>Optimizing Large-Scale Array Data Processing in Python</h1> <hr> </div>  <p><strong>Table of Contents</strong></p>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#understanding-the-data-dimensions-and-memory-usage">Understanding the Data Dimensions and Memory Usage</a></li>
+<li><a href="#techniques-for-memory-efficient-array-processing">Techniques for Memory-Efficient Array Processing</a>
+<ul>
+<li><a href="#1-full-load-in-memory">1. Load Full In Memory</a></li>
+<li><a href="#2-chunking-data-processing">2. Chunking Data Processing</a></li>
+<li><a href="#3-memory-mapping-large-files">3. Memory Mapping Large Files</a></li>
+<li><a href="#4-incremental--online-algorithms">4. Incremental / Online Algorithms</a></li>
+<li><a href="#5-parallel-and-distributed-computing">5. Parallel and Distributed Computing</a></li>
+</ul>
+</li>
+<li><a href="#benchmarking-different-approaches">Benchmarking Different Approaches</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#references">References</a></li>
+</ul>
+<h2 id="introduction">Introduction</h2>
+<p>When dealing with large array-based datasets —especially multidimensional time-series data— memory usage and performance become key concerns. A typical task might involve calculating the square of all values or computing aggregated metrics across millions of samples, which can easily exceed available memory if not handled properly.</p>
+<p>This guide presents practical strategies to process such datasets efficiently using Python, without the need to load everything into memory at once.</p>
+<h2 id="understanding-the-data-dimensions-and-memory-usage">Understanding the Data Dimensions and Memory Usage</h2>
+<p>Assume the dataset is a large 2D array:</p>
+<ul>
+<li>Sampling frequency: 2000 Hz</li>
+<li>Duration: 60 seconds</li>
+<li>Number of spatial points: 6000</li>
+<li>Resulting shape: (6000, 120,000)</li>
+</ul>
+<h3 id="memory-estimation">Memory Estimation</h3>
+<p>Assuming data is stored as 64-bit floats (8 bytes per sample):</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#E1E4E8">channels </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 6000</span></span>
+<span class="line"><span style="color:#E1E4E8">sampling_rate </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 2000</span><span style="color:#6A737D">  # Hz</span></span>
+<span class="line"><span style="color:#E1E4E8">duration </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 60</span><span style="color:#6A737D">  # seconds</span></span>
+<span class="line"><span style="color:#E1E4E8">samples </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> sampling_rate </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> duration  </span><span style="color:#6A737D"># 120,000 samples</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">memory_bytes </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> channels </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> samples </span><span style="color:#F97583">*</span><span style="color:#79B8FF"> 8</span><span style="color:#6A737D">  # bytes for float32</span></span>
+<span class="line"><span style="color:#E1E4E8">memory_mb </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> memory_bytes </span><span style="color:#F97583">/</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">1024</span><span style="color:#F97583">**</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF">print</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">f</span><span style="color:#9ECBFF">&quot;Estimated memory usage: </span><span style="color:#79B8FF">{</span><span style="color:#E1E4E8">memory_mb</span><span style="color:#F97583">:.2f</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF"> MB&quot;</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<p><strong>Estimated Memory Usage:</strong> ~5.49 GB</p>
+<p>This means loading the full dataset into RAM may not be feasible on many machines.</p>
+<h2 id="techniques-for-memory-efficient-array-processing">Techniques for Memory-Efficient Array Processing</h2>
+<h3 id="1-full-load-in-memory">1. Full Load in memory</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> compute_squared_sum_full_load</span><span style="color:#E1E4E8">():</span></span>
+<span class="line"><span style="color:#E1E4E8">    data </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> np.load(file_path)  </span><span style="color:#6A737D"># Carga todo el array en RAM</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> np.sum(data </span><span style="color:#F97583">**</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">dtype</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&#39;float64&#39;</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<h3 id="2-chunking-data-processing">2. Chunking Data Processing</h3>
+<p>Read and process data in small time-based or column-based chunks to manage memory usage efficiently.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> numpy </span><span style="color:#F97583">as</span><span style="color:#E1E4E8"> np</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">chunk_size </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 2000</span><span style="color:#6A737D">  # 1 second worth of samples</span></span>
+<span class="line"><span style="color:#E1E4E8">total_chunks </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> samples </span><span style="color:#F97583">//</span><span style="color:#E1E4E8"> chunk_size</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> compute_squared_sum_chunked</span><span style="color:#E1E4E8">(file_path):</span></span>
+<span class="line"><span style="color:#E1E4E8">    squared_sum </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0.0</span></span>
+<span class="line"><span style="color:#F97583">    for</span><span style="color:#E1E4E8"> chunk_idx </span><span style="color:#F97583">in</span><span style="color:#79B8FF"> range</span><span style="color:#E1E4E8">(total_chunks):</span></span>
+<span class="line"><span style="color:#E1E4E8">        data_chunk </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> read_chunk(file_path, chunk_idx, chunk_size)  </span></span>
+<span class="line"><span style="color:#E1E4E8">        squared_sum </span><span style="color:#F97583">+=</span><span style="color:#E1E4E8"> np.sum(data_chunk </span><span style="color:#F97583">**</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> squared_sum</span></span></code></pre>
+<h3 id="3-memory-mapping-large-files">3. Memory Mapping Large Files</h3>
+<p>Use <code>numpy.memmap</code> to map the data to memory without loading everything at once.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> numpy </span><span style="color:#F97583">as</span><span style="color:#E1E4E8"> np</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">data_memmap </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> np.memmap(</span><span style="color:#9ECBFF">&#39;data_array.dat&#39;</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">dtype</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&#39;float32&#39;</span><span style="color:#E1E4E8">, </span></span>
+<span class="line"><span style="color:#FFAB70">                        mode</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&#39;r&#39;</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">shape</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">(channels, samples))</span></span>
+<span class="line"><span style="color:#E1E4E8">squared_sum </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> np.sum(data_memmap </span><span style="color:#F97583">**</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<p>This approach is efficient for large files that don’t fit in RAM.</p>
+<h3 id="4-incremental--online-algorithms">4. Incremental / Online Algorithms</h3>
+<p>Streaming or online processing avoids loading the whole dataset at once:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> incremental_squared_sum</span><span style="color:#E1E4E8">(stream_generator):</span></span>
+<span class="line"><span style="color:#E1E4E8">    total </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0.0</span></span>
+<span class="line"><span style="color:#F97583">    for</span><span style="color:#E1E4E8"> data_chunk </span><span style="color:#F97583">in</span><span style="color:#E1E4E8"> stream_generator:</span></span>
+<span class="line"><span style="color:#E1E4E8">        total </span><span style="color:#F97583">+=</span><span style="color:#E1E4E8"> np.sum(data_chunk </span><span style="color:#F97583">**</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> total</span></span></code></pre>
+<h3 id="5-parallel-and-distributed-computing">5. Parallel and Distributed Computing</h3>
+<p>Speed up processing by dividing chunks across CPU cores or machines.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> multiprocessing </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> Pool</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> process_chunk</span><span style="color:#E1E4E8">(chunk_data):</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> np.sum(chunk_data </span><span style="color:#F97583">**</span><span style="color:#79B8FF"> 2</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">with</span><span style="color:#E1E4E8"> Pool() </span><span style="color:#F97583">as</span><span style="color:#E1E4E8"> pool:</span></span>
+<span class="line"><span style="color:#E1E4E8">    results </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> pool.map(process_chunk, chunks_list)</span></span>
+<span class="line"><span style="color:#E1E4E8">squared_sum </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> sum</span><span style="color:#E1E4E8">(results)</span></span></code></pre>
+<p>This leverages modern multi-core CPUs effectively.</p>
+<h2 id="benchmarking-different-approaches">Benchmarking Different Approaches</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Method</th><th>Peak Memory Usage (GB)</th><th>Estimated Time (s)</th></tr></thead><tbody><tr><td>Full Load in Memory</td><td>~4.95</td><td>~53.10</td></tr><tr><td>Chunked Processing</td><td>~0.21</td><td>~38.28</td></tr><tr><td>Memory Mapping</td><td>~9.54</td><td>~8.64</td></tr><tr><td>Incremental Streaming</td><td>~0.21</td><td>~12.11</td></tr><tr><td>Parallel Processing</td><td>~0.02</td><td>~3.08</td></tr></tbody></table>
+<p><strong>Benchmark example:</strong> Calculating square sum on a (6000x120,000) dataset</p>
+<blockquote>
+<p><strong>Note:</strong> Please repeat this benchmark on your own machine.<br/>
+Results may vary depending on system specifications, CPU load, memory usage, and other running processes.</p>
+</blockquote>
+<img src="/images/all_methods_memory_plot.webp" title="Memory usage over time for each processing method benchmarked" alt="Memory usage over time for each processing method benchmarked" width="800"/>
+<h2 id="conclusion">Conclusion</h2>
+<p>Large 2D datasets, such as time-series matrices with thousands of channels and high sampling rates, can challenge memory limits. Python provides several scalable strategies to process such data without memory overload: chunking, memory mapping, streaming, and parallelization.</p>
+<p>These methods make it feasible to compute large-scale operations like squaring values or summing powers efficiently and reliably on commodity hardware.</p>
+<h2 id="references">References</h2>
+<ol>
+<li>NumPy Documentation: <a href="https://numpy.org/doc/stable/reference/generated/numpy.memmap.html">https://numpy.org/doc/stable/reference/generated/numpy.memmap.html</a></li>
+<li>Python Multiprocessing: <a href="https://docs.python.org/3/library/multiprocessing.html">https://docs.python.org/3/library/multiprocessing.html</a></li>
+</ol>  </div> </article>  <footer class="border-t border-gray-200 "> <!-- <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+    <div>
+      <span class="font-bold text-lg">Explore</span>
+      <ul class="mt-4 space-y-2">
+        <li><a href="/about" title="About" class="hover:text-gray-400">About</a></li>
+        <li><a href="/blog" title="Blog"  class="hover:text-gray-400">Blog</a></li>
+      </ul>
+    </div>
+    
+    <div>
+      <span class="font-bold text-lg">Connect</span>
+      <ul class="mt-4 space-y-2">
+        <li><a href="/contact" title="Contact" class="hover:text-gray-400">Contact</a></li>
+      </ul>
+    </div>
+  </div> --> <!-- Bottom Section --> <div class="mt-8 pt-6 text-center text-sm gap-4"> <div class="mt-2 space-x-4"> <a href="/terms" title="Terms">Terms and Conditions</a> <a href="/privacy" title="Privacy">Privacy Policy</a> </div> <p class="mt-2">&copy; 2025 Abel Garcia. All rights reserved.</p> </div> </footer> </body></html>

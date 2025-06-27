@@ -1,0 +1,264 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><!-- <meta name="generator" content={Astro.generator} /> --><link rel="canonical" href="https://agrubio.dev"><!-- <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "dd291c700634478e8e9835384fbf1a89"}'></script>
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-43TSMZE2VS"></script>
+		<script id="google-analytics">
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'G-43TSMZE2VS');
+		</script> --><title>Full Stack Developer | React &amp; Python Optimization Expert</title><meta name="description" content="I'm agrubio, a full stack developer focused on code optimization, refactoring, and building scalable applications using Python and React. Check out my portfolio and recent work."><meta name="keywords" content="full stack developer, Python developer, React developer, code optimization, refactoring expert, performance engineering, web development, software development, software engineer, agrubio portfolio"><meta property="og:type" content="website"><meta property="og:url" content="https://agrubio.dev"><meta property="og:title" content="Full Stack Developer | React &#38; Python Optimization Expert"><meta property="og:description" content="I'm agrubio, a full stack developer focused on code optimization, refactoring, and building scalable applications using Python and React. Check out my portfolio and recent work."><meta property="og:image" content="https://agrubio.dev/images/tenweb_media_rczvprsdi.webp"><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://agrubio.dev"><meta property="twitter:title" content="Full Stack Developer | React &#38; Python Optimization Expert"><meta property="twitter:description" content="I'm agrubio, a full stack developer focused on code optimization, refactoring, and building scalable applications using Python and React. Check out my portfolio and recent work."><meta property="twitter:image" content="https://agrubio.dev/images/tenweb_media_rczvprsdi.webp"><meta name="author" content="agrubio"><meta name="publisher" content="agrubio.dev"><meta name="robots" content="index, follow"><style>.btn-normal-pp[data-astro-cid-jjagjrbk]{padding:.75rem 1.5rem;border-radius:.375rem;font-weight:500;transition:all .2s}.btn-blue-400-reverse[data-astro-cid-jjagjrbk]{color:#60a5fa;background-color:transparent;border:1px solid #60a5fa}.btn-blue-400-reverse[data-astro-cid-jjagjrbk]:hover{color:#fff;background-color:#60a5fa}.focus\:ring-blue-500[data-astro-cid-jjagjrbk]:focus{--tw-ring-color: #3b82f6;box-shadow:0 0 0 3px #3b82f680}.border-red-500[data-astro-cid-jjagjrbk]{border-color:#ef4444}.focus\:ring-red-500[data-astro-cid-jjagjrbk]:focus{--tw-ring-color: #ef4444;box-shadow:0 0 0 3px #ef444480}
+</style>
+<link rel="stylesheet" href="/_astro/about.D3eBPi7K.css"></head> <body data-astro-cid-sckkx6r4> <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] lg:w-[80%] z-50 transition-all duration-300 rounded-2xl "> <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between"> <div class="flex-1"> <span id="item1" class="font-bold text-2xl"> <a href="/" title="Main page">Abel Garcia </a> </span> </div> <!-- Menú para Desktop --> <nav class="hidden md:flex space-x-6" id="main-nav"> <a href="/about" title="About me"> About me </a><a href="/blog" title="Blog"> Blog </a> </nav> <!-- Botón del menú móvil --> <button onclick="toggleMenu()" id="item2" class="md:hidden text-2xl" aria-label="Toggle menu"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <line x1="3" y1="12" x2="21" y2="12"></line> <line x1="3" y1="6" x2="21" y2="6"></line> <line x1="3" y1="18" x2="21" y2="18"></line> </svg> </button> </div> <!-- Menú móvil --> <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full shadow-lg rounded-2xl py-4 flex-col items-center space-y-4 
+    "> <nav class="flex flex-col space-y-4 text-center"> <a href="/about" title="About me" onclick="toggleMenu()" class=" "> About me </a><a href="/blog" title="Blog" onclick="toggleMenu()" class=" "> Blog </a> </nav> <!-- <div class="flex flex-col items-center mt-4 space-y-2 w-full">
+      <a href='/services' class={`${isHomePage ? 'btn-h-w' : 'btn-normal-pp btn-blue-400'} w-2/4 flex flex-col items-center`} 
+      onclick="toggleMenu()">
+        Get Started
+      </a>
+      <a href='/contact' class={`${isHomePage ? 'btn-h-w2' : 'btn-normal-pp btn-blue-400-reverse'} w-2/4 flex flex-col items-center`} 
+      onclick="toggleMenu()">
+        Contact Me
+      </a>
+    </div> --> </div> </header> <script>
+  let isOpen = false;
+  
+  function toggleMenu() {
+    isOpen = !isOpen;
+    const path = window.location.pathname;
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+    mobileMenu.classList.toggle('bg-white', true);
+
+  }
+
+  // Manejo del scroll
+  let isScrolled = false;
+  
+    const path = window.location.pathname;
+    const isHomePage = path === '/';
+          const item1 = document.getElementById('item1');
+   item1.classList.toggle('text-black', !isHomePage);
+   item1.classList.toggle('text-white', isHomePage);
+       const item2 = document.getElementById('item2');
+   item2.classList.toggle('text-black', !isHomePage);
+   item2.classList.toggle('text-white', isHomePage);
+        const navLinks = document.querySelectorAll('#main-nav a');
+    navLinks.forEach(link => {
+      link.classList.toggle('text-black', !isHomePage);
+      link.classList.toggle('text-white', isHomePage);
+    });
+
+
+  window.addEventListener('scroll', () => {
+    isScrolled = window.scrollY > 50;
+    const header = document.querySelector('header');
+    header.classList.toggle('scrolled', isScrolled);
+    header.classList.toggle('shadow-2xl', isScrolled);
+    header.classList.toggle('bg-white', isScrolled);
+
+
+    const path = window.location.pathname;
+    const isHomePage = path === '/';
+    if (isHomePage){
+          const item1 = document.getElementById('item1');
+    item1.classList.toggle('text-black', isScrolled);
+    item1.classList.toggle('text-white', !isScrolled);
+        const item2 = document.getElementById('item2');
+    item2.classList.toggle('text-black', isScrolled);
+    item2.classList.toggle('text-white', !isScrolled);
+    const navLinks = document.querySelectorAll('#main-nav a');
+    navLinks.forEach(link => {
+      link.classList.toggle('text-black', isScrolled);
+      link.classList.toggle('text-white', !isScrolled);
+    });
+    }
+
+  });
+</script>  <section class="py-16 mt-25 text-center bg-white " data-astro-cid-jjagjrbk> <div class="animate-fade-in-up" data-astro-cid-jjagjrbk> <div class="text-3xl md:text-4xl font-bold mb-4" data-astro-cid-jjagjrbk>Contact Me</div> <div class="text-lg text-gray-600 max-w-2xl mx-auto" data-astro-cid-jjagjrbk>
+I'd love to hear from you! Reach out today.
+</div> </div> <div class="max-w-lg mx-auto mt-8 animate-fade-in-up" data-astro-cid-jjagjrbk> <form id="contact-form" class="space-y-4" data-astro-cid-jjagjrbk> <div data-astro-cid-jjagjrbk> <label class="block text-left text-gray-500 font-medium" data-astro-cid-jjagjrbk>Email</label> <input id="email" type="email" name="email" placeholder="Enter your email" class="w-full p-3 shadow-xl rounded-md focus:outline-none focus:ring-2" data-astro-cid-jjagjrbk> <p class="text-red-500 text-sm" data-error="email" data-astro-cid-jjagjrbk></p> </div> <div data-astro-cid-jjagjrbk> <label class="block text-left text-gray-500 font-medium" data-astro-cid-jjagjrbk>Subject</label> <input id="subject" type="text" name="subject" placeholder="Subject" class="w-full p-3 shadow-xl rounded-md focus:outline-none focus:ring-2" data-astro-cid-jjagjrbk> <p class="text-red-500 text-sm" data-error="subject" data-astro-cid-jjagjrbk></p> </div> <div data-astro-cid-jjagjrbk> <label class="block text-left text-gray-500 font-medium" data-astro-cid-jjagjrbk>Message</label> <textarea id="message" name="message" placeholder="Type your message" rows="5" class="w-full p-3 shadow-xl rounded-md focus:outline-none focus:ring-2" data-astro-cid-jjagjrbk></textarea> <p class="text-red-500 text-sm" data-error="message" data-astro-cid-jjagjrbk></p> </div> <div class="flex items-center text-left" data-astro-cid-jjagjrbk> <input id="checkbox" type="checkbox" name="termsAccepted" class="mr-2" data-astro-cid-jjagjrbk> <label for="checkbox" class="text-gray-700" data-astro-cid-jjagjrbk>I accept the Terms</label> </div> <p class="text-red-500 text-sm" data-error="termsAccepted" data-astro-cid-jjagjrbk></p> <button type="submit" class="btn-normal-pp btn-blue-400-reverse opacity-50 cursor-not-allowed" disabled data-astro-cid-jjagjrbk>
+Submit
+</button> </form> </div> </section> <!-- <script is:inline>
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('contact-form');
+
+  let formData = {
+    email: "",
+    subject: "",
+    message: "",
+    termsAccepted: false
+  };
+
+  let errors = {};
+  let isSubmitted = true;
+  let isFormValid = false;
+
+  form.querySelectorAll('input, textarea').forEach(field => {
+    field.addEventListener('change', (e) => {
+      const { name, type, value, checked } = e.target;
+      
+      formData[name] = type === 'checkbox' ? checked : value;
+        console.log("etnntra", formData);
+      if (isSubmitted) {
+        validateForm();
+      }
+    });
+  });
+
+  function validateForm() {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    errors = {
+      email: formData.email.trim()
+        ? emailRegex.test(formData.email)
+          ? ""
+          : "Invalid email format"
+        : "Email is required",
+      subject: formData.subject.trim() ? "" : "Subject is required",
+      message: formData.message.trim() ? "" : "Message is required",
+      termsAccepted: formData.termsAccepted ? "" : "You must accept the terms"
+    };
+
+    isFormValid = Object.values(errors).every(error => error === "");
+    updateErrorMessages();
+    updateSubmitButton();
+  }
+
+  function updateErrorMessages() {
+    Object.keys(errors).forEach(key => {
+      const errorElement = form.querySelector(`[data-error="${key}"]`);
+      if (errorElement) {
+        errorElement.textContent = errors[key];
+      }
+    });
+  }
+
+  function updateSubmitButton() {
+    const submitButton = form.querySelector('button[type="submit"]');
+    if (submitButton) {
+      submitButton.disabled = !isFormValid;
+      submitButton.classList.toggle('opacity-50', !isFormValid);
+      submitButton.classList.toggle('cursor-not-allowed', !isFormValid);
+    }
+  }
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    isSubmitted = true;
+    validateForm();
+
+    if (isFormValid) {
+      console.log('Formulario válido, enviando...', formData);
+      handleSubmit(e, form);
+    }
+  });
+});
+</script>
+
+<script type="module" is:inline>
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+
+    form.addEventListener('submit', async (e) => {
+      try {
+        await handleSubmit(e, form);
+      } catch (err) {
+        console.error('Error en el envío del formulario:', err);
+      }
+    });
+  });
+</script> --> <script type="module">
+  import { handleSubmit } from '/js/contact-handler.js';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contact-form');
+    if (!form) return;
+
+    let formData = {
+      email: "",
+      subject: "",
+      message: "",
+      termsAccepted: false
+    };
+
+    let errors = {};
+    let isSubmitted = false;
+    let isFormValid = false;
+
+    form.querySelectorAll('input, textarea').forEach(field => {
+      field.addEventListener('change', (e) => {
+        const { name, type, value, checked } = e.target;
+        formData[name] = type === 'checkbox' ? checked : value;
+
+        if (isSubmitted) {
+          validateForm();
+        }
+      });
+    });
+
+    function validateForm() {
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      errors = {
+        email: formData.email.trim()
+          ? emailRegex.test(formData.email)
+            ? ""
+            : "Invalid email format"
+          : "Email is required",
+        subject: formData.subject.trim() ? "" : "Subject is required",
+        message: formData.message.trim() ? "" : "Message is required",
+        termsAccepted: formData.termsAccepted ? "" : "You must accept the terms"
+      };
+
+      isFormValid = Object.values(errors).every(error => error === "");
+      updateErrorMessages();
+      updateSubmitButton();
+    }
+
+    function updateErrorMessages() {
+      Object.keys(errors).forEach(key => {
+        const errorElement = form.querySelector(`[data-error="${key}"]`);
+        if (errorElement) {
+          errorElement.textContent = errors[key];
+        }
+      });
+    }
+
+    function updateSubmitButton() {
+      const submitButton = form.querySelector('button[type="submit"]');
+      if (submitButton) {
+        submitButton.disabled = !isFormValid;
+        submitButton.classList.toggle('opacity-50', !isFormValid);
+        submitButton.classList.toggle('cursor-not-allowed', !isFormValid);
+      }
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      isSubmitted = true;
+      validateForm();
+
+      if (isFormValid) {
+        try {
+          await handleSubmit(e, form);
+        } catch (err) {
+          console.error('Error en el envío del formulario:', err);
+        }
+      }
+    });
+  });
+</script>   <footer class="border-t border-gray-200 "> <!-- <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+    <div>
+      <span class="font-bold text-lg">Explore</span>
+      <ul class="mt-4 space-y-2">
+        <li><a href="/about" title="About" class="hover:text-gray-400">About</a></li>
+        <li><a href="/blog" title="Blog"  class="hover:text-gray-400">Blog</a></li>
+      </ul>
+    </div>
+    
+    <div>
+      <span class="font-bold text-lg">Connect</span>
+      <ul class="mt-4 space-y-2">
+        <li><a href="/contact" title="Contact" class="hover:text-gray-400">Contact</a></li>
+      </ul>
+    </div>
+  </div> --> <!-- Bottom Section --> <div class="mt-8 pt-6 text-center text-sm gap-4"> <div class="mt-2 space-x-4"> <a href="/terms" title="Terms">Terms and Conditions</a> <a href="/privacy" title="Privacy">Privacy Policy</a> </div> <p class="mt-2">&copy; 2025 Abel Garcia. All rights reserved.</p> </div> </footer> </body></html>
