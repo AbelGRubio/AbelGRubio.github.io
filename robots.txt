@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://agrubio.dev/sitemap-index.xml
