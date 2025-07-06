@@ -1,0 +1,230 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><!-- <meta name="generator" content={Astro.generator} /> --><link rel="canonical" href="https://agrubio.dev/blog/traefik-docker-reverse-proxy"><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;dd291c700634478e8e9835384fbf1a89&quot;}"></script><!-- Klaro script (CDN) --><script src="/js/klaro-config.js"></script><script defer src="https://cdn.kiprotect.com/klaro/v0.7.18/klaro.js"></script><link rel="stylesheet" href="https://cdn.kiprotect.com/klaro/v0.7.18/klaro.css"><title>Full Stack Developer | React &amp; Python Optimization Expert</title><meta name="description" content="I'm agrubio, a full stack developer focused on code optimization, refactoring, and building scalable applications using Python and React. Check out my portfolio and recent work."><meta name="keywords" content="full stack developer, Python developer, React developer, code optimization, refactoring expert, performance engineering, web development, software development, software engineer, agrubio portfolio"><meta property="og:type" content="website"><meta property="og:url" content="https://agrubio.dev"><meta property="og:title" content="Full Stack Developer | React &#38; Python Optimization Expert"><meta property="og:description" content="I'm agrubio, a full stack developer focused on code optimization, refactoring, and building scalable applications using Python and React. Check out my portfolio and recent work."><meta property="og:image" content="https://agrubio.dev/images/tenweb_media_rczvprsdi.webp"><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://agrubio.dev"><meta property="twitter:title" content="Full Stack Developer | React &#38; Python Optimization Expert"><meta property="twitter:description" content="I'm agrubio, a full stack developer focused on code optimization, refactoring, and building scalable applications using Python and React. Check out my portfolio and recent work."><meta property="twitter:image" content="https://agrubio.dev/images/tenweb_media_rczvprsdi.webp"><meta name="author" content="agrubio"><meta name="publisher" content="agrubio.dev"><meta name="robots" content="index, follow"><script type="text/plain" data-cookiecategory="analytics">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{trackingId}}');
+
+  (function() {
+    var ga = document.createElement('script');
+    ga.src = `https://www.googletagmanager.com/gtag/js?id={{trackingId}}`;
+    ga.async = true;
+    document.head.appendChild(ga);
+  })();
+</script><script src="/js/copy-code.js"></script><link rel="stylesheet" href="/about.css"></head> <body data-astro-cid-sckkx6r4> <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] lg:w-[80%] z-50 transition-all duration-300 rounded-2xl "> <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between"> <div class="flex-1"> <span id="item1" class="font-bold text-2xl"> <a href="/" title="Main page">Abel Garcia </a> </span> </div> <!-- Menú para Desktop --> <nav class="hidden md:flex space-x-6" id="main-nav"> <a href="/about" title="About me"> About me </a><a href="/blog" title="Blog"> Blog </a> </nav> <!-- Botón del menú móvil --> <button onclick="toggleMenu()" id="item2" class="md:hidden text-2xl" aria-label="Toggle menu"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <line x1="3" y1="12" x2="21" y2="12"></line> <line x1="3" y1="6" x2="21" y2="6"></line> <line x1="3" y1="18" x2="21" y2="18"></line> </svg> </button> </div> <!-- Menú móvil --> <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full shadow-lg rounded-2xl py-4 flex-col items-center space-y-4 
+    "> <nav class="flex flex-col space-y-4 text-center"> <a href="/about" title="About me" onclick="toggleMenu()" class=" "> About me </a><a href="/blog" title="Blog" onclick="toggleMenu()" class=" "> Blog </a> </nav> <!-- <div class="flex flex-col items-center mt-4 space-y-2 w-full">
+      <a href='/services' class={`${isHomePage ? 'btn-h-w' : 'btn-normal-pp btn-blue-400'} w-2/4 flex flex-col items-center`} 
+      onclick="toggleMenu()">
+        Get Started
+      </a>
+      <a href='/contact' class={`${isHomePage ? 'btn-h-w2' : 'btn-normal-pp btn-blue-400-reverse'} w-2/4 flex flex-col items-center`} 
+      onclick="toggleMenu()">
+        Contact Me
+      </a>
+    </div> --> </div> </header> <script>
+  let isOpen = false;
+  
+  function toggleMenu() {
+    isOpen = !isOpen;
+    const path = window.location.pathname;
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+    mobileMenu.classList.toggle('bg-white', true);
+
+  }
+
+  // Manejo del scroll
+  let isScrolled = false;
+  
+    const path = window.location.pathname;
+    const isHomePage = path === '/';
+          const item1 = document.getElementById('item1');
+   item1.classList.toggle('text-black', !isHomePage);
+   item1.classList.toggle('text-white', isHomePage);
+       const item2 = document.getElementById('item2');
+   item2.classList.toggle('text-black', !isHomePage);
+   item2.classList.toggle('text-white', isHomePage);
+        const navLinks = document.querySelectorAll('#main-nav a');
+    navLinks.forEach(link => {
+      link.classList.toggle('text-black', !isHomePage);
+      link.classList.toggle('text-white', isHomePage);
+    });
+
+
+  window.addEventListener('scroll', () => {
+    isScrolled = window.scrollY > 50;
+    const header = document.querySelector('header');
+    header.classList.toggle('scrolled', isScrolled);
+    header.classList.toggle('shadow-2xl', isScrolled);
+    header.classList.toggle('bg-white', isScrolled);
+
+
+    const path = window.location.pathname;
+    const isHomePage = path === '/';
+    if (isHomePage){
+          const item1 = document.getElementById('item1');
+    item1.classList.toggle('text-black', isScrolled);
+    item1.classList.toggle('text-white', !isScrolled);
+        const item2 = document.getElementById('item2');
+    item2.classList.toggle('text-black', isScrolled);
+    item2.classList.toggle('text-white', !isScrolled);
+    const navLinks = document.querySelectorAll('#main-nav a');
+    navLinks.forEach(link => {
+      link.classList.toggle('text-black', isScrolled);
+      link.classList.toggle('text-white', !isScrolled);
+    });
+    }
+
+  });
+</script>  <section class="mt-20 p-6"> <article class="mx-auto max-w-6xl "> <div class="prose prose-lg " id="blog"> <div class="title"> <div class="date"> <time datetime="2025-07-04T00:00:00.000Z">Jul 4, 2025</time>  </div> <h1>How to Use Traefik as a Reverse Proxy with Docker</h1> <h2 class="text-lg!">This Traefik tutorial shows how to use Traefik as a reverse proxy with Docker, configure routing, enable HTTPS, and deploy a containerized web service.</h2> <hr> </div> <h2 id="introduction">Introduction</h2>
+<p>Deploying and exposing Dockerized applications securely is a core challenge in modern development. Enter <a href="https://traefik.io/"><strong>Traefik</strong></a>, a powerful cloud-native reverse proxy that dynamically manages traffic routing to your services. Whether you’re hosting APIs, dashboards, or microservices, Traefik offers seamless Docker integration, automatic HTTPS via Let’s Encrypt, and smart routing logic out of the box.</p>
+<p>In this <strong>Traefik tutorial</strong>, you’ll learn how to set up Traefik as a reverse proxy with Docker using a real-world example. We’ll cover HTTPS, routers, services, middlewares, and troubleshooting tips—everything you need to get started confidently.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#what-is-traefik-and-why-use-it">What is Traefik and Why Use It</a></li>
+<li><a href="#benefits-of-traefik-as-a-reverse-proxy">Benefits of Traefik as a Reverse Proxy</a></li>
+<li><a href="#step-by-step-setup-using-docker-compose">Step-by-Step Setup Using Docker Compose</a></li>
+<li><a href="#configure-routers-services-and-middlewares">Configure Routers, Services, and Middlewares</a></li>
+<li><a href="#enable-https-with-lets-encrypt">Enable HTTPS with Let’s Encrypt</a></li>
+<li><a href="#traefik-docker-example-project">Traefik Docker Example Project</a></li>
+<li><a href="#common-mistakes-and-troubleshooting-tips">Common Mistakes and Troubleshooting Tips</a></li>
+<li><a href="#conclusion-and-next-steps">Conclusion and Next Steps</a></li>
+<li><a href="#references">References</a></li>
+</ul>
+<h2 id="what-is-traefik-and-why-use-it">What is Traefik and Why Use It</h2>
+<p><strong>Traefik</strong> is a modern reverse proxy and load balancer designed to manage microservices and containerized environments. Unlike traditional proxies like NGINX, Traefik dynamically discovers services and updates its configuration without a restart. This feature is crucial for environments that change frequently, such as during deployments or scaling events.</p>
+<p>Traefik acts as a gateway between your clients and services, intelligently routing HTTP(S) requests to the correct backend. It is especially powerful in DevOps setups where automation, scalability, and observability are priorities.</p>
+<h2 id="benefits-of-traefik-as-a-reverse-proxy">Benefits of Traefik as a Reverse Proxy</h2>
+<p>Here’s why Traefik stands out for Docker-based projects:</p>
+<ul>
+<li><strong>Dynamic Service Discovery</strong>: Automatically updates routes as containers start and stop.</li>
+<li><strong>Docker-Native</strong>: Reads labels on containers to configure routers, services, and TLS.</li>
+<li><strong>Let’s Encrypt Support</strong>: Automatically provisions and renews SSL certificates.</li>
+<li><strong>Extensible Middlewares</strong>: Supports redirect rules, authentication, rate limiting, and more.</li>
+<li><strong>Lightweight and Fast</strong>: Minimal configuration with a fast Go-based runtime.</li>
+<li><strong>Dashboard UI</strong>: Visualize services, routers, and errors in real-time.</li>
+</ul>
+<p>For teams adopting infrastructure-as-code, Traefik provides a robust, secure, and developer-friendly solution.</p>
+<h2 id="step-by-step-setup-using-docker-compose">Step-by-Step Setup Using Docker Compose</h2>
+<p>Let’s walk through a basic Docker Compose setup that includes Traefik and a demo container using labels for routing.</p>
+<h3 id="file-structure">File Structure</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="plaintext"><code><span class="line"><span>.</span></span>
+<span class="line"><span>├── docker-compose.yml</span></span>
+<span class="line"><span>└── traefik</span></span>
+<span class="line"><span>    ├── traefik.yml</span></span>
+<span class="line"><span>    └── acme.json</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="docker-composeyml">docker-compose.yml</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#85E89D">services</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  traefik</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    image</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">traefik:v3.4.0-rc1</span></span>
+<span class="line"><span style="color:#85E89D">    command</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#9ECBFF">--configFile=/etc/traefik/traefik.yml</span></span>
+<span class="line"><span style="color:#85E89D">    ports</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#9ECBFF">&quot;80:80&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#9ECBFF">&quot;443:443&quot;</span></span>
+<span class="line"><span style="color:#85E89D">    volumes</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#9ECBFF">./traefik/traefik.yml:/etc/traefik/traefik.yml:ro</span></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#9ECBFF">./traefik/acme.json:/acme.json</span></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#9ECBFF">/var/run/docker.sock:/var/run/docker.sock</span></span>
+<span class="line"><span style="color:#85E89D">    labels</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#9ECBFF">&quot;traefik.enable=true&quot;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#85E89D">  whoami</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    image</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">traefik/whoami</span></span>
+<span class="line"><span style="color:#85E89D">    labels</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#9ECBFF">&quot;traefik.enable=true&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#9ECBFF">&quot;traefik.http.routers.whoami.rule=Host(`whoami.localhost`)&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#9ECBFF">&quot;traefik.http.routers.whoami.entrypoints=websecure&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#9ECBFF">&quot;traefik.http.routers.whoami.tls.certresolver=myresolver&quot;</span></span></code></pre>
+<h3 id="traefikyml">traefik.yml</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#85E89D">entryPoints</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  web</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    address</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;:80&quot;</span></span>
+<span class="line"><span style="color:#85E89D">  websecure</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    address</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;:443&quot;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#85E89D">providers</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  docker</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    exposedByDefault</span><span style="color:#E1E4E8">: </span><span style="color:#79B8FF">false</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#85E89D">certificatesResolvers</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  myresolver</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    acme</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">      email</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">your-email@example.com</span></span>
+<span class="line"><span style="color:#85E89D">      storage</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">/acme.json</span></span>
+<span class="line"><span style="color:#85E89D">      httpChallenge</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">        entryPoint</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">web</span></span></code></pre>
+<p>Make sure to create the <code>acme.json</code> file with correct permissions:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">touch</span><span style="color:#9ECBFF"> traefik/acme.json</span></span>
+<span class="line"><span style="color:#B392F0">chmod</span><span style="color:#79B8FF"> 600</span><span style="color:#9ECBFF"> traefik/acme.json</span></span></code></pre>
+<h2 id="configure-routers-services-and-middlewares">Configure Routers, Services, and Middlewares</h2>
+<p>Traefik works using the following core concepts:</p>
+<ul>
+<li><strong>Routers</strong> match incoming requests based on domain or path.</li>
+<li><strong>Services</strong> define which container or backend receives the request.</li>
+<li><strong>Middlewares</strong> modify requests or add features like redirection or auth.</li>
+</ul>
+<p>Here’s how to force HTTPS using middleware:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#85E89D">labels</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#9ECBFF">&quot;traefik.http.routers.myapp.rule=Host(`myapp.localhost`)&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#9ECBFF">&quot;traefik.http.routers.myapp.entrypoints=web&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#9ECBFF">&quot;traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">  - </span><span style="color:#9ECBFF">&quot;traefik.http.routers.myapp.middlewares=redirect-to-https&quot;</span></span></code></pre>
+<p>This configuration catches insecure HTTP requests and forwards them to HTTPS before routing to the backend.</p>
+<h2 id="enable-https-with-lets-encrypt">Enable HTTPS with Let’s Encrypt</h2>
+<p>To enable HTTPS automatically:</p>
+<ol>
+<li>Set up an <strong>ACME resolver</strong> in <code>traefik.yml</code>.</li>
+<li>Add <code>tls.certresolver=myresolver</code> to the router.</li>
+<li>Ensure ports 80 and 443 are exposed and reachable.</li>
+<li>Use valid domains or map <code>*.localhost</code> in <code>/etc/hosts</code>.</li>
+</ol>
+<p>Once set up, Traefik handles certificate requests and renewals transparently.</p>
+<h2 id="traefik-docker-example-project">Traefik Docker Example Project</h2>
+<p>This example launches Traefik and a demo app behind HTTPS. Run the following:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">docker-compose</span><span style="color:#9ECBFF"> up</span><span style="color:#79B8FF"> -d</span></span></code></pre>
+<p>Then, in your browser, go to:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="plaintext"><code><span class="line"><span>https://whoami.localhost</span></span></code></pre>
+<p>You should see a simple response from the <code>whoami</code> container with request metadata. Verify the SSL certificate via your browser to confirm HTTPS is active.</p>
+<h2 id="common-mistakes-and-troubleshooting-tips">Common Mistakes and Troubleshooting Tips</h2>
+<ul>
+<li><strong>Permission denied on acme.json</strong>: Fix with <code>chmod 600 traefik/acme.json</code>.</li>
+<li><strong>Domain not resolving</strong>: Add <code>127.0.0.1 whoami.localhost</code> to <code>/etc/hosts</code>.</li>
+<li><strong>Certs not issued</strong>: Ensure port 80 is open and email is correct.</li>
+<li><strong>Container unreachable</strong>: Check Docker labels and service names.</li>
+<li><strong>Dashboard not visible</strong>: Enable with <code>--api.dashboard=true</code> and expose port 8080.</li>
+</ul>
+<p>Use <code>docker logs traefik</code> for real-time feedback and inspect router status in the dashboard.</p>
+<h2 id="conclusion-and-next-steps">Conclusion and Next Steps</h2>
+<p>You’ve now configured <strong>Traefik as a reverse proxy with Docker</strong>, enabling automatic HTTPS and dynamic service routing. Traefik simplifies deployment and enhances the security and observability of your Docker-based services.</p>
+<h3 id="whats-next">What’s Next?</h3>
+<ul>
+<li>Integrate with production domains and DNS providers</li>
+<li>Use Traefik middlewares for rate limiting or OAuth2</li>
+<li>Deploy Traefik with <strong>Kubernetes</strong> using CRDs</li>
+<li>Connect with <strong>Keycloak</strong> for identity-aware routing</li>
+</ul>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://doc.traefik.io/traefik/">Traefik Documentation</a></li>
+<li><a href="https://letsencrypt.org/">Let’s Encrypt</a></li>
+<li><a href="https://docs.docker.com/compose/">Docker Compose Docs</a></li>
+<li><a href="https://doc.traefik.io/traefik/middlewares/overview/">Traefik Middlewares</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Reverse_proxy">Reverse Proxy Concepts</a></li>
+</ul> </div> </article> </section>  <div id="klaro" data-astro-cid-sckkx6r4></div> <footer class="border-t border-gray-200 "> <!-- <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+    <div>
+      <span class="font-bold text-lg">Explore</span>
+      <ul class="mt-4 space-y-2">
+        <li><a href="/about" title="About" class="hover:text-gray-400">About</a></li>
+        <li><a href="/blog" title="Blog"  class="hover:text-gray-400">Blog</a></li>
+      </ul>
+    </div>
+    
+    <div>
+      <span class="font-bold text-lg">Connect</span>
+      <ul class="mt-4 space-y-2">
+        <li><a href="/contact" title="Contact" class="hover:text-gray-400">Contact</a></li>
+      </ul>
+    </div>
+  </div> --> <!-- Bottom Section --> <div class="mt-8 pt-6 text-center text-sm gap-4"> <div class="mt-2 space-x-4"> <a href="/terms" title="Terms">Terms and Conditions</a> <a href="/privacy" title="Privacy">Privacy Policy</a> </div> <p class="mt-2">&copy; 2025 Abel Garcia. All rights reserved.</p> </div> </footer> </body></html>
