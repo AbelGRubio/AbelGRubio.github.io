@@ -1,0 +1,397 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><!-- <meta name="generator" content={Astro.generator} /> --><link rel="canonical" href="https://agrubio.dev/blog/oauth2-oidc-keycloak-python-react"><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;dd291c700634478e8e9835384fbf1a89&quot;}"></script><!-- Klaro script (CDN) --><script src="/js/klaro-config.js"></script><script defer src="https://cdn.kiprotect.com/klaro/v0.7.18/klaro.js"></script><link rel="stylesheet" href="https://cdn.kiprotect.com/klaro/v0.7.18/klaro.css"><title>Full Stack Developer | React &amp; Python Optimization Expert</title><meta name="description" content="I'm agrubio, a full stack developer focused on code optimization, refactoring, and building scalable applications using Python and React. Check out my portfolio and recent work."><meta name="keywords" content="full stack developer, Python developer, React developer, code optimization, refactoring expert, performance engineering, web development, software development, software engineer, agrubio portfolio"><meta property="og:type" content="website"><meta property="og:url" content="https://agrubio.dev"><meta property="og:title" content="Full Stack Developer | React &#38; Python Optimization Expert"><meta property="og:description" content="I'm agrubio, a full stack developer focused on code optimization, refactoring, and building scalable applications using Python and React. Check out my portfolio and recent work."><meta property="og:image" content="https://agrubio.dev/images/tenweb_media_rczvprsdi.webp"><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://agrubio.dev"><meta property="twitter:title" content="Full Stack Developer | React &#38; Python Optimization Expert"><meta property="twitter:description" content="I'm agrubio, a full stack developer focused on code optimization, refactoring, and building scalable applications using Python and React. Check out my portfolio and recent work."><meta property="twitter:image" content="https://agrubio.dev/images/tenweb_media_rczvprsdi.webp"><meta name="author" content="agrubio"><meta name="publisher" content="agrubio.dev"><meta name="robots" content="index, follow"><script type="text/plain" data-cookiecategory="analytics">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{trackingId}}');
+
+  (function() {
+    var ga = document.createElement('script');
+    ga.src = `https://www.googletagmanager.com/gtag/js?id={{trackingId}}`;
+    ga.async = true;
+    document.head.appendChild(ga);
+  })();
+</script><script src="/js/copy-code.js"></script><link rel="stylesheet" href="/about.css"></head> <body data-astro-cid-sckkx6r4> <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] lg:w-[80%] z-50 transition-all duration-300 rounded-2xl "> <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between"> <div class="flex-1"> <span id="item1" class="font-bold text-2xl"> <a href="/" title="Main page">Abel Garcia </a> </span> </div> <!-- Menú para Desktop --> <nav class="hidden md:flex space-x-6" id="main-nav"> <a href="/about" title="About me"> About me </a><a href="/blog" title="Blog"> Blog </a> </nav> <!-- Botón del menú móvil --> <button onclick="toggleMenu()" id="item2" class="md:hidden text-2xl" aria-label="Toggle menu"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <line x1="3" y1="12" x2="21" y2="12"></line> <line x1="3" y1="6" x2="21" y2="6"></line> <line x1="3" y1="18" x2="21" y2="18"></line> </svg> </button> </div> <!-- Menú móvil --> <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full shadow-lg rounded-2xl py-4 flex-col items-center space-y-4 
+    "> <nav class="flex flex-col space-y-4 text-center"> <a href="/about" title="About me" onclick="toggleMenu()" class=" "> About me </a><a href="/blog" title="Blog" onclick="toggleMenu()" class=" "> Blog </a> </nav> <!-- <div class="flex flex-col items-center mt-4 space-y-2 w-full">
+      <a href='/services' class={`${isHomePage ? 'btn-h-w' : 'btn-normal-pp btn-blue-400'} w-2/4 flex flex-col items-center`} 
+      onclick="toggleMenu()">
+        Get Started
+      </a>
+      <a href='/contact' class={`${isHomePage ? 'btn-h-w2' : 'btn-normal-pp btn-blue-400-reverse'} w-2/4 flex flex-col items-center`} 
+      onclick="toggleMenu()">
+        Contact Me
+      </a>
+    </div> --> </div> </header> <script>
+  let isOpen = false;
+  
+  function toggleMenu() {
+    isOpen = !isOpen;
+    const path = window.location.pathname;
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+    mobileMenu.classList.toggle('bg-white', true);
+
+  }
+
+  // Manejo del scroll
+  let isScrolled = false;
+  
+    const path = window.location.pathname;
+    const isHomePage = path === '/';
+          const item1 = document.getElementById('item1');
+   item1.classList.toggle('text-black', !isHomePage);
+   item1.classList.toggle('text-white', isHomePage);
+       const item2 = document.getElementById('item2');
+   item2.classList.toggle('text-black', !isHomePage);
+   item2.classList.toggle('text-white', isHomePage);
+        const navLinks = document.querySelectorAll('#main-nav a');
+    navLinks.forEach(link => {
+      link.classList.toggle('text-black', !isHomePage);
+      link.classList.toggle('text-white', isHomePage);
+    });
+
+
+  window.addEventListener('scroll', () => {
+    isScrolled = window.scrollY > 50;
+    const header = document.querySelector('header');
+    header.classList.toggle('scrolled', isScrolled);
+    header.classList.toggle('shadow-2xl', isScrolled);
+    header.classList.toggle('bg-white', isScrolled);
+
+
+    const path = window.location.pathname;
+    const isHomePage = path === '/';
+    if (isHomePage){
+          const item1 = document.getElementById('item1');
+    item1.classList.toggle('text-black', isScrolled);
+    item1.classList.toggle('text-white', !isScrolled);
+        const item2 = document.getElementById('item2');
+    item2.classList.toggle('text-black', isScrolled);
+    item2.classList.toggle('text-white', !isScrolled);
+    const navLinks = document.querySelectorAll('#main-nav a');
+    navLinks.forEach(link => {
+      link.classList.toggle('text-black', isScrolled);
+      link.classList.toggle('text-white', !isScrolled);
+    });
+    }
+
+  });
+</script>  <section class="mt-20 p-6"> <article class="mx-auto max-w-6xl "> <div class="prose prose-lg " id="blog"> <div class="title"> <div class="date"> <time datetime="2025-07-02T00:00:00.000Z">Jul 2, 2025</time>  </div> <h1>Implementing OAuth2 and OpenID Connect (OIDC) with Keycloak: A Python &amp; React Guide</h1> <h2 class="text-lg!">Learn how to implement OAuth2 and OpenID Connect using Keycloak, Docker, Python, and React with secure production-ready best practices.</h2> <hr> </div> <h2 id="introduction">Introduction</h2>
+<p>In today’s digital landscape, application security is paramount. Authentication and authorization are two of the most critical aspects of secure system design. OAuth2 is a widely adopted authorization framework, and OpenID Connect (OIDC) is an identity layer on top of OAuth2 that enables clients to verify user identities. Keycloak, a powerful open-source Identity and Access Management solution, allows you to implement OAuth2/OIDC effortlessly across your stack.</p>
+<p>In this post, we will guide you step-by-step through deploying Keycloak using Docker, setting up your realm and clients, and integrating secure authentication flows into a Python (FastAPI) backend and a React frontend. We’ll also cover security hardening tips for production environments.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="#installing-keycloak-with-docker">Installing Keycloak with Docker</a></li>
+<li><a href="#initial-configuration">Initial Configuration</a></li>
+<li><a href="#registering-applications-clients">Registering Applications (Clients)</a></li>
+<li><a href="#integrating-with-python-fastapi">Integrating with Python (FastAPI)</a></li>
+<li><a href="#integrating-with-react">Integrating with React</a></li>
+<li><a href="#security-best-practices-for-production">Security Best Practices for Production</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#references">References</a></li>
+</ol>
+<blockquote>
+<p>You can find all codes for this post in reference section.</p>
+</blockquote>
+<h2 id="installing-keycloak-with-docker">Installing Keycloak with Docker</h2>
+<p>Keycloak offers an official Docker image that’s ideal for rapid local development.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">docker</span><span style="color:#9ECBFF"> run</span><span style="color:#79B8FF"> -p</span><span style="color:#9ECBFF"> 8080:8080</span><span style="color:#79B8FF"> \</span></span>
+<span class="line"><span style="color:#79B8FF">  -e</span><span style="color:#9ECBFF"> KEYCLOAK_ADMIN=admin</span><span style="color:#79B8FF"> \</span></span>
+<span class="line"><span style="color:#79B8FF">  -e</span><span style="color:#9ECBFF"> KEYCLOAK_ADMIN_PASSWORD=admin</span><span style="color:#79B8FF"> \</span></span>
+<span class="line"><span style="color:#9ECBFF">  quay.io/keycloak/keycloak:24.0.3</span><span style="color:#79B8FF"> \</span></span>
+<span class="line"><span style="color:#9ECBFF">  start-dev</span></span></code></pre>
+<p>or using docker-compose</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="yaml"><code><span class="line"><span style="color:#85E89D">version</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&#39;3.8&#39;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#85E89D">services</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  keycloak</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    image</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">quay.io/keycloak/keycloak:24.0.3</span></span>
+<span class="line"><span style="color:#85E89D">    container_name</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">keycloak</span></span>
+<span class="line"><span style="color:#85E89D">    command</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">start-dev</span></span>
+<span class="line"><span style="color:#85E89D">    ports</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#9ECBFF">&quot;8080:8080&quot;</span></span>
+<span class="line"><span style="color:#85E89D">    environment</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">      KEYCLOAK_ADMIN</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">admin</span></span>
+<span class="line"><span style="color:#85E89D">      KEYCLOAK_ADMIN_PASSWORD</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">admin</span></span>
+<span class="line"><span style="color:#85E89D">    networks</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">      - </span><span style="color:#9ECBFF">keycloak-net</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#85E89D">networks</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">  keycloak-net</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#85E89D">    driver</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">bridge</span></span>
+<span class="line"></span></code></pre>
+<p>Open <code>http://localhost:8080</code> and login with the admin credentials.</p>
+<h2 id="initial-configuration">Initial Configuration</h2>
+<ol>
+<li><strong>Create a Realm:</strong> Go to the admin console, select <em>Create Realm</em>, and name it (e.g., <code>demo</code>).</li>
+<li><strong>Create Users:</strong> Add users under <code>Users</code>, assign them roles and set passwords.</li>
+</ol>
+<h2 id="registering-applications-clients">Registering Applications (Clients)</h2>
+<p>We will registrer only one application called “demo”. And we’ll used it for frontend and backend.
+But that is not a recomendable practice.</p>
+<p>To register an application, follow these steps:</p>
+<ol>
+<li>Go to <code>Clients</code> &gt; <em>Create</em>.</li>
+<li>Set:
+<ul>
+<li>Client ID: <code>demo</code></li>
+<li>Protocol: <code>openid-connect</code></li>
+<li>Access Type: <code>public</code> (React)</li>
+</ul>
+</li>
+<li>Add valid redirect URIs:
+<ul>
+<li>React: <code>http://localhost:3000/*</code></li>
+</ul>
+</li>
+</ol>
+<div class="carousel"><img src="/blog/demo1.png" alt="Configuration1" class="image1"/><img src="/blog/demo2.png" alt="Configuration2" class="image2"/></div>
+<h2 id="integrating-with-python-fastapi">Integrating with Python (FastAPI)</h2>
+<p>Use a custom middleware in FastAPI, to manage the access. This middleware has an interaction
+with keycloak in a simply way, only for retrieve the user information.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> fastapi </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> FastAPI</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> fastapi.middleware.cors </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> CORSMiddleware</span></span>
+<span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> os</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> fastapi </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> Request</span></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> fastapi.responses </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> JSONResponse</span></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> keycloak </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> KeycloakOpenID</span></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> starlette.middleware.base </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> BaseHTTPMiddleware, \</span></span>
+<span class="line"><span style="color:#E1E4E8">    RequestResponseEndpoint</span></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> starlette.responses </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> Response</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#79B8FF">KEYCLOAK_OPENID</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> KeycloakOpenID(</span></span>
+<span class="line"><span style="color:#FFAB70">    server_url</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">os.getenv(</span><span style="color:#9ECBFF">&#39;KEYCLOAK_URL&#39;</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">None</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#FFAB70">    client_id</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">os.getenv(</span><span style="color:#9ECBFF">&#39;CLIENT_ID&#39;</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">None</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#FFAB70">    realm_name</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">os.getenv(</span><span style="color:#9ECBFF">&#39;REALM&#39;</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">None</span><span style="color:#E1E4E8">),</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">the_user </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> None</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> AuthMiddleware</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">BaseHTTPMiddleware</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#9ECBFF">    &quot;&quot;&quot;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF">    This code defines an AuthMiddleware class that extends BaseHTTPMiddleware</span></span>
+<span class="line"><span style="color:#9ECBFF">    to handle authentication for incoming HTTP requests. It checks if the</span></span>
+<span class="line"><span style="color:#9ECBFF">    request URL is in a predefined list of paths that do not require</span></span>
+<span class="line"><span style="color:#9ECBFF">    authentication. If the URL is not in this list, it verifies the</span></span>
+<span class="line"><span style="color:#9ECBFF">    presence of a valid API key in the request headers before allowing</span></span>
+<span class="line"><span style="color:#9ECBFF">    the request to proceed.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF">     &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">    __jump_paths__ </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [</span><span style="color:#9ECBFF">&#39;/docs&#39;</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">&#39;/openapi.json&#39;</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">&#39;/redoc&#39;</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">                      &#39;/health&#39;</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">&#39;/favicon.ico&#39;</span><span style="color:#E1E4E8">, ]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    __name__api_key__ </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> &#39;API_KEY&#39;</span></span>
+<span class="line"><span style="color:#E1E4E8">    __auth__ </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> &#39;authorization&#39;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#79B8FF"> __init__</span><span style="color:#E1E4E8">(self, </span><span style="color:#F97583">*</span><span style="color:#E1E4E8">args, </span><span style="color:#F97583">**</span><span style="color:#E1E4E8">kwargs):</span></span>
+<span class="line"><span style="color:#79B8FF">        super</span><span style="color:#E1E4E8">().</span><span style="color:#79B8FF">__init__</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">*</span><span style="color:#E1E4E8">args, </span><span style="color:#F97583">**</span><span style="color:#E1E4E8">kwargs)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    @</span><span style="color:#79B8FF">staticmethod</span></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> unauthorised</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            code: </span><span style="color:#79B8FF">int</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 401</span><span style="color:#E1E4E8">, msg: </span><span style="color:#79B8FF">str</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> &#39;Unauthorised&#39;</span><span style="color:#E1E4E8">) -&gt; JSONResponse:</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#9ECBFF">            Return a message of unauthorised</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> JSONResponse(</span><span style="color:#FFAB70">status_code</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">code, </span><span style="color:#FFAB70">content</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">msg)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> _is_jump_url_</span><span style="color:#E1E4E8">(self, request: Request) -&gt; </span><span style="color:#79B8FF">bool</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> request.url.path </span><span style="color:#F97583">in</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.__jump_paths__</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> decode_token</span><span style="color:#E1E4E8">(self, token: </span><span style="color:#79B8FF">str</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#E1E4E8">        token_ </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> token.replace(</span><span style="color:#9ECBFF">&#39;Bearer &#39;</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">&#39;&#39;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        payload </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> KEYCLOAK_OPENID</span><span style="color:#E1E4E8">.decode_token(token_)</span></span>
+<span class="line"><span style="color:#F97583">        global</span><span style="color:#E1E4E8"> the_user</span></span>
+<span class="line"><span style="color:#E1E4E8">        the_user </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> payload</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> payload</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> get_header_token</span><span style="color:#E1E4E8">(self, request: Request):</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> request.headers.get(</span><span style="color:#79B8FF">self</span><span style="color:#E1E4E8">.__auth__, </span><span style="color:#9ECBFF">&#39;&#39;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> get_user_config</span><span style="color:#E1E4E8">(self, request: Request) -&gt; </span><span style="color:#79B8FF">dict</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">        token </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.get_header_token(request)</span></span>
+<span class="line"><span style="color:#F97583">        try</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">            decode_token </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.decode_token(token)</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> decode_token</span></span>
+<span class="line"><span style="color:#F97583">        except</span><span style="color:#79B8FF"> Exception</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> {}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> is_auth</span><span style="color:#E1E4E8">(self, request: Request) -&gt; </span><span style="color:#79B8FF">dict</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#9ECBFF">        queda por implementar</span></span>
+<span class="line"><span style="color:#9ECBFF">        :param request:</span></span>
+<span class="line"><span style="color:#9ECBFF">        :return:</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.get_user_config(request)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    async</span><span style="color:#F97583"> def</span><span style="color:#B392F0"> dispatch</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        self, request: Request, call_next: RequestResponseEndpoint</span></span>
+<span class="line"><span style="color:#E1E4E8">    ) -&gt; Response:</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#9ECBFF">        The dispatch method in the AuthMiddleware class is an asynchronous</span></span>
+<span class="line"><span style="color:#9ECBFF">        middleware function that processes incoming HTTP requests.</span></span>
+<span class="line"><span style="color:#9ECBFF">        It checks if the request URL is in a predefined list of paths</span></span>
+<span class="line"><span style="color:#9ECBFF">        that do not require authentication. If the URL is not in this</span></span>
+<span class="line"><span style="color:#9ECBFF">        list, it verifies the presence of a valid API key in the request</span></span>
+<span class="line"><span style="color:#9ECBFF">         headers before allowing the request to proceed.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF">        :param request:  An instance of Request representing the incoming</span></span>
+<span class="line"><span style="color:#9ECBFF">            HTTP request.</span></span>
+<span class="line"><span style="color:#9ECBFF">        :param call_next: A callable (RequestResponseEndpoint) that processes</span></span>
+<span class="line"><span style="color:#9ECBFF">            the next middleware or the actual request handler</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF">        :return: Returns a Response object, either from the next</span></span>
+<span class="line"><span style="color:#9ECBFF">            middleware/request handler or an unauthorized response.</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">._is_jump_url_(request):</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#F97583"> await</span><span style="color:#E1E4E8"> call_next(request)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        response </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.unauthorised()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#79B8FF"> len</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">self</span><span style="color:#E1E4E8">.is_auth(request)) </span><span style="color:#F97583">&gt;</span><span style="color:#79B8FF"> 0</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">            response </span><span style="color:#F97583">=</span><span style="color:#F97583"> await</span><span style="color:#E1E4E8"> call_next(request)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> response</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">app </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> FastAPI()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">app.add_middleware(AuthMiddleware)</span></span>
+<span class="line"><span style="color:#E1E4E8">app.add_middleware(</span></span>
+<span class="line"><span style="color:#E1E4E8">    CORSMiddleware,</span></span>
+<span class="line"><span style="color:#FFAB70">    allow_origins</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">[</span><span style="color:#9ECBFF">&#39;*&#39;</span><span style="color:#E1E4E8">],</span></span>
+<span class="line"><span style="color:#FFAB70">    allow_credentials</span><span style="color:#F97583">=</span><span style="color:#79B8FF">True</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#FFAB70">    allow_methods</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">[</span><span style="color:#9ECBFF">&quot;*&quot;</span><span style="color:#E1E4E8">],</span></span>
+<span class="line"><span style="color:#FFAB70">    allow_headers</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">[</span><span style="color:#9ECBFF">&quot;*&quot;</span><span style="color:#E1E4E8">],</span></span>
+<span class="line"><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">@app.get</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">&quot;/protected&quot;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> read_protected</span><span style="color:#E1E4E8">(message: </span><span style="color:#79B8FF">str</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> &#39;probe&#39;</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> {</span><span style="color:#9ECBFF">&quot;message&quot;</span><span style="color:#E1E4E8">: message </span><span style="color:#F97583">+</span><span style="color:#9ECBFF"> &quot;Received&quot;</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">&quot;user&quot;</span><span style="color:#E1E4E8">: the_user}</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">if</span><span style="color:#79B8FF"> __name__</span><span style="color:#F97583"> ==</span><span style="color:#9ECBFF"> &#39;__main__&#39;</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">    import</span><span style="color:#E1E4E8"> uvicorn</span></span>
+<span class="line"><span style="color:#E1E4E8">    uvicorn.run(</span><span style="color:#FFAB70">app</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">app, </span><span style="color:#FFAB70">host</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;localhost&quot;</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">port</span><span style="color:#F97583">=</span><span style="color:#79B8FF">8000</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span></code></pre>
+<h2 id="integrating-with-react">Integrating with React</h2>
+<p>Use <code>keycloak-js</code> to handle OIDC authentication in React. With this file you can manage the
+autentification using login portal from keycloak. We only include here the file that
+interacts with keycloak. You can find the full react project in the references.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="tsx"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> Keycloak </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> &quot;keycloak-js&quot;</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> keycloakOptions</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#E1E4E8">  url: </span><span style="color:#F97583">import</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">meta</span><span style="color:#E1E4E8">.env.</span><span style="color:#79B8FF">VITE_KEYCLOAK_URL</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">  realm: </span><span style="color:#F97583">import</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">meta</span><span style="color:#E1E4E8">.env.</span><span style="color:#79B8FF">VITE_REALM</span><span style="color:#E1E4E8">, </span></span>
+<span class="line"><span style="color:#E1E4E8">  clientId: </span><span style="color:#F97583">import</span><span style="color:#E1E4E8">.</span><span style="color:#79B8FF">meta</span><span style="color:#E1E4E8">.env.</span><span style="color:#79B8FF">VITE_CLIENT_ID</span><span style="color:#E1E4E8">, </span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> keycloakInstance</span><span style="color:#F97583"> =</span><span style="color:#F97583"> new</span><span style="color:#B392F0"> Keycloak</span><span style="color:#E1E4E8">(keycloakOptions);</span></span>
+<span class="line"><span style="color:#F97583">let</span><span style="color:#E1E4E8"> authenticated </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> null</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#6A737D">/**</span></span>
+<span class="line"><span style="color:#6A737D"> * Initializes Keycloak and handles authentication.</span></span>
+<span class="line"><span style="color:#6A737D"> */</span></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> const</span><span style="color:#B392F0"> initKeycloak</span><span style="color:#F97583"> =</span><span style="color:#F97583"> async</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=&gt;</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (</span><span style="color:#F97583">!</span><span style="color:#E1E4E8">authenticated){</span></span>
+<span class="line"><span style="color:#E1E4E8">      authenticated </span><span style="color:#F97583">=</span><span style="color:#F97583"> await</span><span style="color:#E1E4E8"> keycloakInstance.</span><span style="color:#B392F0">init</span><span style="color:#E1E4E8">({</span></span>
+<span class="line"><span style="color:#E1E4E8">        onLoad: </span><span style="color:#9ECBFF">&quot;login-required&quot;</span><span style="color:#E1E4E8">, </span></span>
+<span class="line"><span style="color:#E1E4E8">        checkLoginIframe: </span><span style="color:#79B8FF">false</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">      });</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> (authenticated) {</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">      setInterval</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">async</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=&gt;</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> (keycloakInstance.</span><span style="color:#B392F0">isTokenExpired</span><span style="color:#E1E4E8">()) {</span></span>
+<span class="line"><span style="color:#F97583">          await</span><span style="color:#E1E4E8"> keycloakInstance.</span><span style="color:#B392F0">updateToken</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">30</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">        }</span></span>
+<span class="line"><span style="color:#E1E4E8">      }, </span><span style="color:#79B8FF">30000</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> authenticated;</span></span>
+<span class="line"><span style="color:#E1E4E8">  } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (error) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    console.</span><span style="color:#B392F0">error</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">`Error in Keycloak: ${</span><span style="color:#E1E4E8">error</span><span style="color:#9ECBFF">}`</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#79B8FF"> false</span><span style="color:#E1E4E8">;</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#6A737D">/**</span></span>
+<span class="line"><span style="color:#6A737D"> * Close and clean the session.</span></span>
+<span class="line"><span style="color:#6A737D"> */</span></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> const</span><span style="color:#B392F0"> handleLogout</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=&gt;</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">  if</span><span style="color:#E1E4E8"> (keycloakInstance) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    sessionStorage.</span><span style="color:#B392F0">removeItem</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">&quot;token&quot;</span><span style="color:#E1E4E8">);</span></span>
+<span class="line"><span style="color:#E1E4E8">    keycloakInstance.</span><span style="color:#B392F0">logout</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">  }</span></span>
+<span class="line"><span style="color:#E1E4E8">};</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">export</span><span style="color:#F97583"> default</span><span style="color:#E1E4E8"> keycloakInstance;</span></span>
+<span class="line"></span></code></pre>
+<blockquote>
+<p>For any request made to the Python API, you must include an Authorization Bearer token in the header,
+using the token you received when logging in. This token is used by your Python
+backend to validate the request.</p>
+</blockquote>
+<h2 id="security-best-practices-for-production">Security Best Practices for Production</h2>
+<p>To prepare your system for production:</p>
+<ul>
+<li>✅ <strong>Enable HTTPS</strong> with a reverse proxy (e.g., NGINX + Let’s Encrypt or Traefik)</li>
+<li>✅ <strong>Enable Multi-Factor Authentication (MFA)</strong> using OTP apps</li>
+<li>✅ <strong>Enforce strong password policies</strong> in Keycloak settings</li>
+<li>✅ <strong>Configure token lifetimes</strong> to reduce risk of token theft</li>
+<li>✅ <strong>Enable audit logging</strong> and review security events</li>
+<li>✅ <strong>Regularly backup Keycloak DB and config</strong></li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>Implementing OAuth2 and OpenID Connect with Keycloak gives you a solid foundation for secure identity and access management. By using Docker, you can spin up Keycloak quickly for dev/testing, and integrating it with FastAPI and React helps secure full-stack applications. Always apply security hardening before moving to production.</p>
+<h2 id="whats-next">What’s Next?</h2>
+<ul>
+<li>
+<p><strong>Role-Based Access Control (RBAC) with Keycloak</strong><br/>
+Dive deeper into Keycloak by implementing fine-grained role and permission management across your frontend and backend.</p>
+</li>
+<li>
+<p><strong>Custom User Attributes and Claims in Tokens</strong><br/>
+Learn how to enrich your tokens with custom claims and use them for authorization logic in your FastAPI backend.</p>
+</li>
+<li>
+<p><strong>Single Sign-On (SSO) Across Multiple Applications</strong><br/>
+Explore how to configure SSO using Keycloak for multiple React apps or microservices sharing authentication.</p>
+</li>
+<li>
+<p><strong>User Self-Service Portals with Keycloak Themes</strong><br/>
+Customize the Keycloak login, registration, and account management pages to match your application’s brand.</p>
+</li>
+<li>
+<p><strong>Deploying Keycloak Securely in Kubernetes with Ingress and TLS</strong><br/>
+Take your deployment to the next level by running Keycloak in a Kubernetes cluster with secure ingress and scalability in mind.</p>
+</li>
+</ul>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://www.keycloak.org/docs/latest/">Keycloak Documentation</a></li>
+<li><a href="https://oauth.net/2/">OAuth2 Overview</a></li>
+<li><a href="https://openid.net/connect/">OIDC Specification</a></li>
+<li><a href="https://fastapi.tiangolo.com/advanced/security/oauth2-scopes/">FastAPI OAuth2 Docs</a></li>
+<li><a href="https://www.npmjs.com/package/keycloak-js">keycloak-js</a></li>
+<li><a href="https://github.com/AbelGRubio/blog/tree/master/oauth2_and_openid">Codes</a></li>
+</ul> </div> </article> </section>  <div id="klaro" data-astro-cid-sckkx6r4></div> <footer class="border-t border-gray-200 "> <!-- <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+    <div>
+      <span class="font-bold text-lg">Explore</span>
+      <ul class="mt-4 space-y-2">
+        <li><a href="/about" title="About" class="hover:text-gray-400">About</a></li>
+        <li><a href="/blog" title="Blog"  class="hover:text-gray-400">Blog</a></li>
+      </ul>
+    </div>
+    
+    <div>
+      <span class="font-bold text-lg">Connect</span>
+      <ul class="mt-4 space-y-2">
+        <li><a href="/contact" title="Contact" class="hover:text-gray-400">Contact</a></li>
+      </ul>
+    </div>
+  </div> --> <!-- Bottom Section --> <div class="mt-8 pt-6 text-center text-sm gap-4"> <div class="mt-2 space-x-4"> <a href="/terms" title="Terms">Terms and Conditions</a> <a href="/privacy" title="Privacy">Privacy Policy</a> </div> <p class="mt-2">&copy; 2025 Abel Garcia. All rights reserved.</p> </div> </footer> </body></html>
