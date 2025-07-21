@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><!-- <meta name="generator" content={Astro.generator} /> --><link rel="canonical" href="https://agrubio.dev/blog/rbac-with-keycloak"><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;dd291c700634478e8e9835384fbf1a89&quot;}"></script><!-- Klaro script (CDN) --><script src="/js/klaro-config.js"></script><script defer src="https://cdn.kiprotect.com/klaro/v0.7.18/klaro.js"></script><link rel="stylesheet" href="https://cdn.kiprotect.com/klaro/v0.7.18/klaro.css"><title>Full Stack Developer | React &amp; Python Optimization Expert</title><meta name="description" content="I'm agrubio, a full stack developer focused on code optimization, refactoring, and building scalable applications using Python and React. Check out my portfolio and recent work."><meta name="keywords" content="full stack developer, Python developer, React developer, code optimization, refactoring expert, performance engineering, web development, software development, software engineer, agrubio portfolio"><meta property="og:type" content="website"><meta property="og:url" content="https://agrubio.dev"><meta property="og:title" content="Full Stack Developer | React &#38; Python Optimization Expert"><meta property="og:description" content="I'm agrubio, a full stack developer focused on code optimization, refactoring, and building scalable applications using Python and React. Check out my portfolio and recent work."><meta property="og:image" content="https://agrubio.dev/images/tenweb_media_rczvprsdi.webp"><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://agrubio.dev"><meta property="twitter:title" content="Full Stack Developer | React &#38; Python Optimization Expert"><meta property="twitter:description" content="I'm agrubio, a full stack developer focused on code optimization, refactoring, and building scalable applications using Python and React. Check out my portfolio and recent work."><meta property="twitter:image" content="https://agrubio.dev/images/tenweb_media_rczvprsdi.webp"><meta name="author" content="agrubio"><meta name="publisher" content="agrubio.dev"><meta name="robots" content="index, follow"><script type="text/plain" data-cookiecategory="analytics">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{trackingId}}');
+
+  (function() {
+    var ga = document.createElement('script');
+    ga.src = `https://www.googletagmanager.com/gtag/js?id={{trackingId}}`;
+    ga.async = true;
+    document.head.appendChild(ga);
+  })();
+</script><script src="/js/copy-code.js"></script><link rel="stylesheet" href="/about.css"></head> <body data-astro-cid-sckkx6r4> <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] lg:w-[80%] z-50 transition-all duration-300 rounded-2xl "> <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between"> <div class="flex-1"> <span id="item1" class="font-bold text-2xl"> <a href="/" title="Main page">Abel Garcia </a> </span> </div> <!-- Menú para Desktop --> <nav class="hidden md:flex space-x-6" id="main-nav"> <a href="/about" title="About me"> About me </a><a href="/blog" title="Blog"> Blog </a> </nav> <!-- Botón del menú móvil --> <button onclick="toggleMenu()" id="item2" class="md:hidden text-2xl" aria-label="Toggle menu"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <line x1="3" y1="12" x2="21" y2="12"></line> <line x1="3" y1="6" x2="21" y2="6"></line> <line x1="3" y1="18" x2="21" y2="18"></line> </svg> </button> </div> <!-- Menú móvil --> <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full shadow-lg rounded-2xl py-4 flex-col items-center space-y-4 
+    "> <nav class="flex flex-col space-y-4 text-center"> <a href="/about" title="About me" onclick="toggleMenu()" class=" "> About me </a><a href="/blog" title="Blog" onclick="toggleMenu()" class=" "> Blog </a> </nav> <!-- <div class="flex flex-col items-center mt-4 space-y-2 w-full">
+      <a href='/services' class={`${isHomePage ? 'btn-h-w' : 'btn-normal-pp btn-blue-400'} w-2/4 flex flex-col items-center`} 
+      onclick="toggleMenu()">
+        Get Started
+      </a>
+      <a href='/contact' class={`${isHomePage ? 'btn-h-w2' : 'btn-normal-pp btn-blue-400-reverse'} w-2/4 flex flex-col items-center`} 
+      onclick="toggleMenu()">
+        Contact Me
+      </a>
+    </div> --> </div> </header> <script>
+  let isOpen = false;
+  
+  function toggleMenu() {
+    isOpen = !isOpen;
+    const path = window.location.pathname;
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+    mobileMenu.classList.toggle('bg-white', true);
+
+  }
+
+  // Manejo del scroll
+  let isScrolled = false;
+  
+    const path = window.location.pathname;
+    const isHomePage = path === '/';
+          const item1 = document.getElementById('item1');
+   item1.classList.toggle('text-black', !isHomePage);
+   item1.classList.toggle('text-white', isHomePage);
+       const item2 = document.getElementById('item2');
+   item2.classList.toggle('text-black', !isHomePage);
+   item2.classList.toggle('text-white', isHomePage);
+        const navLinks = document.querySelectorAll('#main-nav a');
+    navLinks.forEach(link => {
+      link.classList.toggle('text-black', !isHomePage);
+      link.classList.toggle('text-white', isHomePage);
+    });
+
+
+  window.addEventListener('scroll', () => {
+    isScrolled = window.scrollY > 50;
+    const header = document.querySelector('header');
+    header.classList.toggle('scrolled', isScrolled);
+    header.classList.toggle('shadow-2xl', isScrolled);
+    header.classList.toggle('bg-white', isScrolled);
+
+
+    const path = window.location.pathname;
+    const isHomePage = path === '/';
+    if (isHomePage){
+          const item1 = document.getElementById('item1');
+    item1.classList.toggle('text-black', isScrolled);
+    item1.classList.toggle('text-white', !isScrolled);
+        const item2 = document.getElementById('item2');
+    item2.classList.toggle('text-black', isScrolled);
+    item2.classList.toggle('text-white', !isScrolled);
+    const navLinks = document.querySelectorAll('#main-nav a');
+    navLinks.forEach(link => {
+      link.classList.toggle('text-black', isScrolled);
+      link.classList.toggle('text-white', !isScrolled);
+    });
+    }
+
+  });
+</script>  <section class="mt-20 p-6"> <article class="mx-auto max-w-6xl "> <div class="prose prose-lg " id="blog"> <div class="title"> <div class="date"> <time datetime="2025-07-07T00:00:00.000Z">Jul 7, 2025</time>  </div> <h1>Role-Based Access Control (RBAC) with Keycloak</h1> <h2 class="text-lg!">Learn how to implement secure, scalable RBAC with Keycloak across backend (FastAPI) and frontend (React) applications.</h2> <hr> </div> <h2 id="introduction">Introduction</h2>
+<p>In modern applications, especially in multi-tenant or enterprise environments, securing access to resources is paramount. Role-Based Access Control (RBAC) offers a systematic approach to manage who can access what, based on defined roles. With Keycloak, an open-source Identity and Access Management tool, RBAC becomes robust and highly configurable. This guide walks through how to implement and enforce RBAC using Keycloak in both backend (FastAPI) and frontend (React) applications.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#what-is-role-based-access-control-rbac">What is Role-Based Access Control (RBAC)?</a></li>
+<li><a href="#creating-and-managing-roles-in-keycloak">Creating and Managing Roles in Keycloak</a></li>
+<li><a href="#protecting-backend-routes-with-fastapi">Protecting Backend Routes with FastAPI</a></li>
+<li><a href="#frontend-access-control-in-react">Frontend Access Control in React</a></li>
+<li><a href="#best-practices-for-role-management">Best Practices for Role Management</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#references">References</a></li>
+<li><a href="#whats-next">What’s Next?</a></li>
+</ul>
+<h2 id="what-is-role-based-access-control-rbac">What is Role-Based Access Control (RBAC)?</h2>
+<p>RBAC is a security paradigm that restricts access to resources based on a user’s assigned roles. Rather than assigning permissions to each user individually, roles are created for various job functions, and users are assigned to those roles. Each role then has specific permissions associated with it.</p>
+<p>This approach simplifies permission management, especially in large systems. For example, an “Admin” might have full access to all operations, while a “Viewer” might only read data. RBAC ensures that users only see and do what they’re allowed to, reducing the risk of accidental or malicious data exposure.</p>
+<h2 id="creating-and-managing-roles-in-keycloak">Creating and Managing Roles in Keycloak</h2>
+<p>Keycloak allows administrators to define and manage roles at both the <strong>Realm</strong> and <strong>Client</strong> levels. Realm roles are global across the Keycloak instance, while Client roles are specific to an application (client).</p>
+<h3 id="steps">Steps:</h3>
+<ol>
+<li>Login to the Keycloak admin console.</li>
+<li>Navigate to your Realm → Roles → Create Role.</li>
+<li>Assign roles directly to users or through groups.</li>
+<li>For Client roles: Go to Clients → [Your Client] → Roles → Create.</li>
+</ol>
+<p>Keycloak also supports <strong>composite roles</strong>, enabling role hierarchies. For example, an <code>admin</code> role can include <code>editor</code> and <code>viewer</code> roles. This flexibility allows for granular permission structures tailored to your app’s needs. In this post we will work with realms roles.</p>
+<img src="/images/role_creation.png" title="Role creation" alt="Role Creation" width="800"/>
+<h2 id="protecting-backend-routes-with-fastapi">Protecting Backend Routes with FastAPI</h2>
+<p>In FastAPI, we can protect routes by validating the JWT access token issued by Keycloak. Middleware or dependency functions can extract and verify roles from the token. Just to know which role it is, you should modify the  decode_token function in the AuthMiddleware class</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> decode_token</span><span style="color:#E1E4E8">(self, token: </span><span style="color:#79B8FF">str</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#E1E4E8">    token_ </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> token.replace(</span><span style="color:#9ECBFF">&#39;Bearer &#39;</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">&#39;&#39;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">    payload </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> KEYCLOAK_OPENID</span><span style="color:#E1E4E8">.decode_token(token_)</span></span>
+<span class="line"><span style="color:#F97583">    global</span><span style="color:#E1E4E8"> the_user</span></span>
+<span class="line"><span style="color:#E1E4E8">    the_user </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> payload</span></span>
+<span class="line"><span style="color:#79B8FF">    print</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">&quot;The roles are&quot;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#79B8FF">    print</span><span style="color:#E1E4E8">(payload.get(</span><span style="color:#9ECBFF">&#39;realm_access&#39;</span><span style="color:#E1E4E8">,{}).get(</span><span style="color:#9ECBFF">&#39;roles&#39;</span><span style="color:#E1E4E8">,{}))</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> payload</span></span></code></pre>
+<p>This ensures that only users with the correct role can access protected endpoints.</p>
+<h2 id="frontend-access-control-in-react">Frontend Access Control in React</h2>
+<p>On the frontend, you can decode the access token and use roles to conditionally render components. Here we add the new code snippet that you must add to App.jsx to the post project</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="js"><code><span class="line"><span style="color:#F97583">  const</span><span style="color:#B392F0"> getRoles</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> () </span><span style="color:#F97583">=&gt;</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">    try</span><span style="color:#E1E4E8"> {</span></span>
+<span class="line"><span style="color:#F97583">      if</span><span style="color:#E1E4E8"> (keycloakInstance.token) {</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> decoded</span><span style="color:#F97583"> =</span><span style="color:#B392F0"> jwtDecode</span><span style="color:#E1E4E8">(keycloakInstance.token);</span></span>
+<span class="line"><span style="color:#F97583">        const</span><span style="color:#79B8FF"> userRoles</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> decoded?.realm_access?.roles </span><span style="color:#F97583">||</span><span style="color:#E1E4E8"> [];</span></span>
+<span class="line"><span style="color:#B392F0">        setRoles</span><span style="color:#E1E4E8">(userRoles);</span></span>
+<span class="line"><span style="color:#E1E4E8">        console.</span><span style="color:#B392F0">log</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">&quot;User roles:&quot;</span><span style="color:#E1E4E8">, userRoles);</span></span>
+<span class="line"><span style="color:#E1E4E8">      }</span></span>
+<span class="line"><span style="color:#E1E4E8">    } </span><span style="color:#F97583">catch</span><span style="color:#E1E4E8"> (error) {</span></span>
+<span class="line"><span style="color:#E1E4E8">      console.</span><span style="color:#B392F0">error</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">&quot;Failed to decode token:&quot;</span><span style="color:#E1E4E8">, error);</span></span>
+<span class="line"><span style="color:#E1E4E8">    }</span></span>
+<span class="line"><span style="color:#E1E4E8">  };</span></span></code></pre>
+<p>This approach enhances the user experience by only showing relevant UI elements while enforcing access control in the backend.</p>
+<h2 id="best-practices-for-role-management">Best Practices for Role Management</h2>
+<ul>
+<li><strong>Avoid hardcoding roles</strong>: Centralize role names and access logic.</li>
+<li><strong>Use custom claims</strong>: Add business-specific attributes in tokens if needed.</li>
+<li><strong>Implement scopes</strong>: Use OAuth2 scopes to define fine-grained access.</li>
+<li><strong>Audit regularly</strong>: Periodically review assigned roles and permissions.</li>
+<li><strong>Secure tokens</strong>: Ensure tokens are short-lived and transmitted over HTTPS.</li>
+</ul>
+<p>Adopting these practices helps maintain a secure, manageable, and scalable RBAC system.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>RBAC with Keycloak provides a powerful way to manage permissions across your systems. By defining roles centrally and enforcing them in both frontend and backend, you ensure a clean separation of concerns and reduce security risks. FastAPI and React make it easy to integrate with Keycloak and apply role-based logic where it matters most.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://www.keycloak.org/documentation.html">Keycloak Documentation</a></li>
+<li><a href="https://fastapi.tiangolo.com/tutorial/security/">FastAPI Security</a></li>
+<li><a href="https://oauth.net/2/">OAuth2 and OIDC</a></li>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc7519">JWT Specification</a></li>
+</ul>
+<h2 id="whats-next">What’s Next?</h2>
+<ul>
+<li>Integrating Keycloak with GitLab CI/CD for dev/test environments.</li>
+<li>Managing custom user attributes and dynamic permissions.</li>
+<li>Implementing Attribute-Based Access Control (ABAC) with Keycloak.</li>
+<li>Token introspection and refresh strategies in SPAs.</li>
+<li>SSO across multiple microservices using Keycloak Gatekeeper.</li>
+</ul> </div> </article> </section>  <div id="klaro" data-astro-cid-sckkx6r4></div> <footer class="border-t border-gray-200 "> <!-- <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+    <div>
+      <span class="font-bold text-lg">Explore</span>
+      <ul class="mt-4 space-y-2">
+        <li><a href="/about" title="About" class="hover:text-gray-400">About</a></li>
+        <li><a href="/blog" title="Blog"  class="hover:text-gray-400">Blog</a></li>
+      </ul>
+    </div>
+    
+    <div>
+      <span class="font-bold text-lg">Connect</span>
+      <ul class="mt-4 space-y-2">
+        <li><a href="/contact" title="Contact" class="hover:text-gray-400">Contact</a></li>
+      </ul>
+    </div>
+  </div> --> <!-- Bottom Section --> <div class="mt-8 pt-6 text-center text-sm gap-4"> <div class="mt-2 space-x-4"> <a href="/terms" title="Terms">Terms and Conditions</a> <a href="/privacy" title="Privacy">Privacy Policy</a> </div> <p class="mt-2">&copy; 2025 Abel Garcia. All rights reserved.</p> </div> </footer> </body></html>
