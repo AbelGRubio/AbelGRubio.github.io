@@ -1,0 +1,200 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><!-- <meta name="generator" content={Astro.generator} /> --><link rel="canonical" href="https://agrubio.dev/blog/abac-with-keycloak"><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;dd291c700634478e8e9835384fbf1a89&quot;}"></script><!-- Klaro script (CDN) --><script src="/js/klaro-config.js"></script><script defer src="https://cdn.kiprotect.com/klaro/v0.7.18/klaro.js"></script><link rel="stylesheet" href="https://cdn.kiprotect.com/klaro/v0.7.18/klaro.css"><title>Full Stack Developer | React &amp; Python Optimization Expert</title><meta name="description" content="I'm agrubio, a full stack developer focused on code optimization, refactoring, and building scalable applications using Python and React. Check out my portfolio and recent work."><meta name="keywords" content="full stack developer, Python developer, React developer, code optimization, refactoring expert, performance engineering, web development, software development, software engineer, agrubio portfolio"><meta property="og:type" content="website"><meta property="og:url" content="https://agrubio.dev"><meta property="og:title" content="Full Stack Developer | React &#38; Python Optimization Expert"><meta property="og:description" content="I'm agrubio, a full stack developer focused on code optimization, refactoring, and building scalable applications using Python and React. Check out my portfolio and recent work."><meta property="og:image" content="https://agrubio.dev/images/tenweb_media_rczvprsdi.webp"><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://agrubio.dev"><meta property="twitter:title" content="Full Stack Developer | React &#38; Python Optimization Expert"><meta property="twitter:description" content="I'm agrubio, a full stack developer focused on code optimization, refactoring, and building scalable applications using Python and React. Check out my portfolio and recent work."><meta property="twitter:image" content="https://agrubio.dev/images/tenweb_media_rczvprsdi.webp"><meta name="author" content="agrubio"><meta name="publisher" content="agrubio.dev"><meta name="robots" content="index, follow"><script type="text/plain" data-cookiecategory="analytics">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{trackingId}}');
+
+  (function() {
+    var ga = document.createElement('script');
+    ga.src = `https://www.googletagmanager.com/gtag/js?id={{trackingId}}`;
+    ga.async = true;
+    document.head.appendChild(ga);
+  })();
+</script><script src="/js/copy-code.js"></script><link rel="stylesheet" href="/about.css"></head> <body data-astro-cid-sckkx6r4> <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] lg:w-[80%] z-50 transition-all duration-300 rounded-2xl "> <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between"> <div class="flex-1"> <span id="item1" class="font-bold text-2xl"> <a href="/" title="Main page">Abel Garcia </a> </span> </div> <!-- Menú para Desktop --> <nav class="hidden md:flex space-x-6" id="main-nav"> <a href="/about" title="About me"> About me </a><a href="/blog" title="Blog"> Blog </a> </nav> <!-- Botón del menú móvil --> <button onclick="toggleMenu()" id="item2" class="md:hidden text-2xl" aria-label="Toggle menu"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <line x1="3" y1="12" x2="21" y2="12"></line> <line x1="3" y1="6" x2="21" y2="6"></line> <line x1="3" y1="18" x2="21" y2="18"></line> </svg> </button> </div> <!-- Menú móvil --> <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full shadow-lg rounded-2xl py-4 flex-col items-center space-y-4 
+    "> <nav class="flex flex-col space-y-4 text-center"> <a href="/about" title="About me" onclick="toggleMenu()" class=" "> About me </a><a href="/blog" title="Blog" onclick="toggleMenu()" class=" "> Blog </a> </nav> <!-- <div class="flex flex-col items-center mt-4 space-y-2 w-full">
+      <a href='/services' class={`${isHomePage ? 'btn-h-w' : 'btn-normal-pp btn-blue-400'} w-2/4 flex flex-col items-center`} 
+      onclick="toggleMenu()">
+        Get Started
+      </a>
+      <a href='/contact' class={`${isHomePage ? 'btn-h-w2' : 'btn-normal-pp btn-blue-400-reverse'} w-2/4 flex flex-col items-center`} 
+      onclick="toggleMenu()">
+        Contact Me
+      </a>
+    </div> --> </div> </header> <script>
+  let isOpen = false;
+  
+  function toggleMenu() {
+    isOpen = !isOpen;
+    const path = window.location.pathname;
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+    mobileMenu.classList.toggle('bg-white', true);
+
+  }
+
+  // Manejo del scroll
+  let isScrolled = false;
+  
+    const path = window.location.pathname;
+    const isHomePage = path === '/';
+          const item1 = document.getElementById('item1');
+   item1.classList.toggle('text-black', !isHomePage);
+   item1.classList.toggle('text-white', isHomePage);
+       const item2 = document.getElementById('item2');
+   item2.classList.toggle('text-black', !isHomePage);
+   item2.classList.toggle('text-white', isHomePage);
+        const navLinks = document.querySelectorAll('#main-nav a');
+    navLinks.forEach(link => {
+      link.classList.toggle('text-black', !isHomePage);
+      link.classList.toggle('text-white', isHomePage);
+    });
+
+
+  window.addEventListener('scroll', () => {
+    isScrolled = window.scrollY > 50;
+    const header = document.querySelector('header');
+    header.classList.toggle('scrolled', isScrolled);
+    header.classList.toggle('shadow-2xl', isScrolled);
+    header.classList.toggle('bg-white', isScrolled);
+
+
+    const path = window.location.pathname;
+    const isHomePage = path === '/';
+    if (isHomePage){
+          const item1 = document.getElementById('item1');
+    item1.classList.toggle('text-black', isScrolled);
+    item1.classList.toggle('text-white', !isScrolled);
+        const item2 = document.getElementById('item2');
+    item2.classList.toggle('text-black', isScrolled);
+    item2.classList.toggle('text-white', !isScrolled);
+    const navLinks = document.querySelectorAll('#main-nav a');
+    navLinks.forEach(link => {
+      link.classList.toggle('text-black', isScrolled);
+      link.classList.toggle('text-white', !isScrolled);
+    });
+    }
+
+  });
+</script>  <section class="mt-20 p-6"> <article class="mx-auto max-w-6xl "> <div class="prose prose-lg " id="blog"> <div class="title"> <div class="date"> <time datetime="2025-07-07T00:00:00.000Z">Jul 7, 2025</time>  </div> <h1>Implementing Attribute-Based Access Control (ABAC) with Keycloak</h1> <h2 class="text-lg!">Learn how to implement Attribute-Based Access Control using Keycloak, with backend integration in FastAPI and frontend enforcement in React.</h2> <hr> </div> <h2 id="introduction">Introduction</h2>
+<p>Modern applications often require more flexible access control systems than traditional role-based models can provide. Attribute-Based Access Control (ABAC) enhances security by evaluating user attributes like department, region, or clearance level. When paired with a powerful identity provider like Keycloak, ABAC enables fine-grained, contextual authorization for both backend and frontend systems. This post walks through implementing ABAC with Keycloak, using FastAPI on the backend and React on the frontend.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#what-is-abac-and-how-is-it-different-from-rbac">What is ABAC and How Is It Different from RBAC?</a></li>
+<li><a href="#using-keycloaks-fine-grained-authorization-features">Using Keycloak’s Fine-Grained Authorization Features</a></li>
+<li><a href="#defining-attributes-and-policies">Defining Attributes and Policies</a></li>
+<li><a href="#enforcing-abac-in-the-backend-fastapi">Enforcing ABAC in the Backend (FastAPI)</a></li>
+<li><a href="#integrating-abac-in-the-frontend-react">Integrating ABAC in the Frontend (React)</a></li>
+<li><a href="#combining-rbac-and-abac-for-hybrid-access-control">Combining RBAC and ABAC for Hybrid Access Control</a></li>
+<li><a href="#best-practices-for-abac-with-keycloak">Best Practices for ABAC with Keycloak</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#references">References</a></li>
+<li><a href="#whats-next">What’s Next?</a></li>
+</ul>
+<h2 id="what-is-abac-and-how-is-it-different-from-rbac">What is ABAC and How Is It Different from RBAC?</h2>
+<p>Role-Based Access Control (RBAC) uses predefined roles assigned to users to determine access. It’s simple and works well for small to medium systems. However, ABAC (Attribute-Based Access Control) introduces flexibility by basing access decisions on user attributes (e.g., department, location), resource attributes, and environmental context.</p>
+<p>For example, with ABAC, a policy might state: “Only users from the ‘engineering’ department and located in ‘EU’ can access the system after 9AM.” This allows granular and dynamic control based on real-world scenarios. RBAC is role-centric, while ABAC is context-aware.</p>
+<p>ABAC is ideal for complex environments where user roles alone do not provide sufficient control. Combining both can yield hybrid models for robust security.</p>
+<h2 id="using-keycloaks-fine-grained-authorization-features">Using Keycloak’s Fine-Grained Authorization Features</h2>
+<p>Keycloak includes a powerful Authorization tab when using Authorization Services in client settings. This feature must be enabled manually for each client. Once active, it lets you define:</p>
+<ul>
+<li><strong>Resources</strong>: What you want to protect (e.g., endpoints, data scopes).</li>
+<li><strong>Scopes</strong>: Actions or permissions (e.g., <code>read</code>, <code>write</code>).</li>
+<li><strong>Policies</strong>: Rules that determine whether access is granted.</li>
+<li><strong>Permissions</strong>: Link policies and resources together.</li>
+</ul>
+<p>Navigate to your client, enable “Authorization”, and use the GUI or admin REST API to manage ABAC configurations. You can configure attribute-based policies directly from the Keycloak admin console using JavaScript or role-based constraints.</p>
+<h2 id="defining-attributes-and-policies">Defining Attributes and Policies</h2>
+<p>User attributes can be created in the <strong>User Attributes</strong> section of a Keycloak user profile. These attributes (e.g., <code>department</code>, <code>region</code>, <code>clearance</code>) can then be referenced inside policies.</p>
+<p>To create an attribute-based policy:</p>
+<ol>
+<li>Go to your client &gt; Authorization &gt; Policies.</li>
+<li>Choose <strong>JavaScript-based policy</strong>.</li>
+<li>Use code like:</li>
+</ol>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="javascript"><code><span class="line"><span style="color:#F97583">var</span><span style="color:#E1E4E8"> department </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> user.</span><span style="color:#B392F0">getAttribute</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">&quot;department&quot;</span><span style="color:#E1E4E8">)[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">];</span></span>
+<span class="line"><span style="color:#F97583">if</span><span style="color:#E1E4E8"> (department </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> &quot;engineering&quot;</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#E1E4E8">    $evaluation.</span><span style="color:#B392F0">grant</span><span style="color:#E1E4E8">();</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>You can also create policies using Keycloak’s admin REST API for automation. Avoid hardcoding values and use dynamic user attributes for better scalability.</p>
+<h2 id="enforcing-abac-in-the-backend-fastapi">Enforcing ABAC in the Backend (FastAPI)</h2>
+<p>In FastAPI, use Keycloak-issued JWT tokens that contain user claims or query Keycloak’s <code>/userinfo</code> endpoint.</p>
+<p>Here’s a minimal example using <code>fastapi</code> and <code>python-jose</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> fastapi </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> Depends, FastAPI, HTTPException, Request</span></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> jose </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> jwt</span></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> starlette.status </span><span style="color:#F97583">import</span><span style="color:#79B8FF"> HTTP_403_FORBIDDEN</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">app </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> FastAPI()</span></span>
+<span class="line"><span style="color:#79B8FF">KEYCLOAK_PUBLIC_KEY</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> &quot;-----BEGIN PUBLIC KEY-----...&quot;</span></span>
+<span class="line"><span style="color:#79B8FF">ALGORITHM</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> &quot;RS256&quot;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> get_current_user</span><span style="color:#E1E4E8">(request: Request):</span></span>
+<span class="line"><span style="color:#E1E4E8">    token </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> request.headers.get(</span><span style="color:#9ECBFF">&quot;Authorization&quot;</span><span style="color:#E1E4E8">).split(</span><span style="color:#9ECBFF">&quot; &quot;</span><span style="color:#E1E4E8">)[</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">    payload </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> jwt.decode(token, </span><span style="color:#79B8FF">KEYCLOAK_PUBLIC_KEY</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">algorithms</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">[</span><span style="color:#79B8FF">ALGORITHM</span><span style="color:#E1E4E8">])</span></span>
+<span class="line"><span style="color:#F97583">    if</span><span style="color:#E1E4E8"> payload.get(</span><span style="color:#9ECBFF">&quot;department&quot;</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">!=</span><span style="color:#9ECBFF"> &quot;engineering&quot;</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">        raise</span><span style="color:#E1E4E8"> HTTPException(</span><span style="color:#FFAB70">status_code</span><span style="color:#F97583">=</span><span style="color:#79B8FF">HTTP_403_FORBIDDEN</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">detail</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&quot;Not authorized&quot;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> payload</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">@app.get</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">&quot;/protected&quot;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> protected_route</span><span style="color:#E1E4E8">(user</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">Depends(get_current_user)):</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> {</span><span style="color:#9ECBFF">&quot;message&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;Access granted&quot;</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">&quot;user&quot;</span><span style="color:#E1E4E8">: user}</span></span></code></pre>
+<p>This ensures backend logic enforces attribute-based restrictions at runtime.</p>
+<h2 id="integrating-abac-in-the-frontend-react">Integrating ABAC in the Frontend (React)</h2>
+<p>In the frontend, secure UI elements by conditionally rendering based on user attributes.</p>
+<p>Use libraries like <code>keycloak-js</code> or <code>@react-keycloak/web</code>:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="jsx"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> user</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> keycloak.tokenParsed;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">if</span><span style="color:#E1E4E8"> (user?.department </span><span style="color:#F97583">===</span><span style="color:#9ECBFF"> &quot;engineering&quot;</span><span style="color:#E1E4E8">) {</span></span>
+<span class="line"><span style="color:#F97583">  return</span><span style="color:#E1E4E8"> &lt;</span><span style="color:#79B8FF">AdminDashboard</span><span style="color:#E1E4E8"> /&gt;;</span></span>
+<span class="line"><span style="color:#E1E4E8">}</span></span></code></pre>
+<p>Never rely solely on frontend logic for access control; it’s for usability only. The backend must remain the source of truth.</p>
+<p>Store tokens securely (in memory or <code>httpOnly</code> cookies) and avoid storing sensitive attributes in localStorage or exposing them in URLs.</p>
+<h2 id="combining-rbac-and-abac-for-hybrid-access-control">Combining RBAC and ABAC for Hybrid Access Control</h2>
+<p>Hybrid models use roles for coarse-grained control and attributes for fine-grained decisions.</p>
+<p>For example, you can define:</p>
+<ul>
+<li>RBAC: Only users with role <code>admin</code> can access <code>/admin</code>.</li>
+<li>ABAC: Among admins, only those in the <code>EU</code> region can perform critical operations.</li>
+</ul>
+<p>In Keycloak, you can combine both in a policy using logical constraints. This approach keeps policies modular, readable, and adaptable.</p>
+<h2 id="best-practices-for-abac-with-keycloak">Best Practices for ABAC with Keycloak</h2>
+<ul>
+<li><strong>Keep policies manageable</strong>: Avoid overly nested or complex conditions.</li>
+<li><strong>Secure attributes</strong>: Use trusted sources and avoid client-side injection.</li>
+<li><strong>Standardize attribute names</strong>: Maintain naming consistency across services.</li>
+<li><strong>Use decision caching</strong>: When appropriate, cache Keycloak decisions to reduce API calls.</li>
+<li><strong>Audit logs</strong>: Enable audit logging in Keycloak for tracking policy evaluations.</li>
+</ul>
+<p>These practices ensure performance and maintainability in real-world systems.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>ABAC adds powerful flexibility to access control by leveraging user attributes, context, and policy logic. Keycloak’s built-in tools, combined with a secure backend (FastAPI) and smart frontend integration (React), allow developers to implement robust and scalable authorization models. Blending ABAC and RBAC enables hybrid systems tailored to real-world business needs.</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://www.keycloak.org/documentation">Keycloak Documentation</a></li>
+<li><a href="https://fastapi.tiangolo.com/advanced/security/">FastAPI Security Guide</a></li>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc6749">OAuth2 &amp; OIDC Best Practices</a></li>
+<li><a href="https://csrc.nist.gov/publications/detail/sp/800-162/final">ABAC Concepts</a></li>
+</ul>
+<h2 id="whats-next">What’s Next?</h2>
+<ul>
+<li>Implementing Policy Decision Points (PDP) and Enforcement Points (PEP) with OPA</li>
+<li>Managing Dynamic Attributes via Keycloak Mappers and User Federation</li>
+<li>Fine-grained Audit Logging with Keycloak Events API</li>
+<li>Distributed Authorization for Microservices with Keycloak and Envoy</li>
+<li>Role Engineering: Designing Scalable Role/Attribute Hierarchies</li>
+</ul> </div> </article> </section>  <div id="klaro" data-astro-cid-sckkx6r4></div> <footer class="border-t border-gray-200 "> <!-- <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+    <div>
+      <span class="font-bold text-lg">Explore</span>
+      <ul class="mt-4 space-y-2">
+        <li><a href="/about" title="About" class="hover:text-gray-400">About</a></li>
+        <li><a href="/blog" title="Blog"  class="hover:text-gray-400">Blog</a></li>
+      </ul>
+    </div>
+    
+    <div>
+      <span class="font-bold text-lg">Connect</span>
+      <ul class="mt-4 space-y-2">
+        <li><a href="/contact" title="Contact" class="hover:text-gray-400">Contact</a></li>
+      </ul>
+    </div>
+  </div> --> <!-- Bottom Section --> <div class="mt-8 pt-6 text-center text-sm gap-4"> <div class="mt-2 space-x-4"> <a href="/terms" title="Terms">Terms and Conditions</a> <a href="/privacy" title="Privacy">Privacy Policy</a> </div> <p class="mt-2">&copy; 2025 Abel Garcia. All rights reserved.</p> </div> </footer> </body></html>

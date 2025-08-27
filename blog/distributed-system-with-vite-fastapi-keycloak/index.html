@@ -1,0 +1,678 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><!-- <meta name="generator" content={Astro.generator} /> --><link rel="canonical" href="https://agrubio.dev/blog/distributed-system-with-vite-fastapi-keycloak"><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;dd291c700634478e8e9835384fbf1a89&quot;}"></script><!-- Klaro script (CDN) --><script src="/js/klaro-config.js"></script><script defer src="https://cdn.kiprotect.com/klaro/v0.7.18/klaro.js"></script><link rel="stylesheet" href="https://cdn.kiprotect.com/klaro/v0.7.18/klaro.css"><title>Full Stack Developer | React &amp; Python Optimization Expert</title><meta name="description" content="I'm agrubio, a full stack developer focused on code optimization, refactoring, and building scalable applications using Python and React. Check out my portfolio and recent work."><meta name="keywords" content="full stack developer, Python developer, React developer, code optimization, refactoring expert, performance engineering, web development, software development, software engineer, agrubio portfolio"><meta property="og:type" content="website"><meta property="og:url" content="https://agrubio.dev"><meta property="og:title" content="Full Stack Developer | React &#38; Python Optimization Expert"><meta property="og:description" content="I'm agrubio, a full stack developer focused on code optimization, refactoring, and building scalable applications using Python and React. Check out my portfolio and recent work."><meta property="og:image" content="https://agrubio.dev/images/tenweb_media_rczvprsdi.webp"><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://agrubio.dev"><meta property="twitter:title" content="Full Stack Developer | React &#38; Python Optimization Expert"><meta property="twitter:description" content="I'm agrubio, a full stack developer focused on code optimization, refactoring, and building scalable applications using Python and React. Check out my portfolio and recent work."><meta property="twitter:image" content="https://agrubio.dev/images/tenweb_media_rczvprsdi.webp"><meta name="author" content="agrubio"><meta name="publisher" content="agrubio.dev"><meta name="robots" content="index, follow"><script type="text/plain" data-cookiecategory="analytics">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{trackingId}}');
+
+  (function() {
+    var ga = document.createElement('script');
+    ga.src = `https://www.googletagmanager.com/gtag/js?id={{trackingId}}`;
+    ga.async = true;
+    document.head.appendChild(ga);
+  })();
+</script><script src="/js/copy-code.js"></script><link rel="stylesheet" href="/about.css"></head> <body data-astro-cid-sckkx6r4> <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] lg:w-[80%] z-50 transition-all duration-300 rounded-2xl "> <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between"> <div class="flex-1"> <span id="item1" class="font-bold text-2xl"> <a href="/" title="Main page">Abel Garcia </a> </span> </div> <!-- Menú para Desktop --> <nav class="hidden md:flex space-x-6" id="main-nav"> <a href="/about" title="About me"> About me </a><a href="/blog" title="Blog"> Blog </a> </nav> <!-- Botón del menú móvil --> <button onclick="toggleMenu()" id="item2" class="md:hidden text-2xl" aria-label="Toggle menu"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <line x1="3" y1="12" x2="21" y2="12"></line> <line x1="3" y1="6" x2="21" y2="6"></line> <line x1="3" y1="18" x2="21" y2="18"></line> </svg> </button> </div> <!-- Menú móvil --> <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full shadow-lg rounded-2xl py-4 flex-col items-center space-y-4 
+    "> <nav class="flex flex-col space-y-4 text-center"> <a href="/about" title="About me" onclick="toggleMenu()" class=" "> About me </a><a href="/blog" title="Blog" onclick="toggleMenu()" class=" "> Blog </a> </nav> <!-- <div class="flex flex-col items-center mt-4 space-y-2 w-full">
+      <a href='/services' class={`${isHomePage ? 'btn-h-w' : 'btn-normal-pp btn-blue-400'} w-2/4 flex flex-col items-center`} 
+      onclick="toggleMenu()">
+        Get Started
+      </a>
+      <a href='/contact' class={`${isHomePage ? 'btn-h-w2' : 'btn-normal-pp btn-blue-400-reverse'} w-2/4 flex flex-col items-center`} 
+      onclick="toggleMenu()">
+        Contact Me
+      </a>
+    </div> --> </div> </header> <script>
+  let isOpen = false;
+  
+  function toggleMenu() {
+    isOpen = !isOpen;
+    const path = window.location.pathname;
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+    mobileMenu.classList.toggle('bg-white', true);
+
+  }
+
+  // Manejo del scroll
+  let isScrolled = false;
+  
+    const path = window.location.pathname;
+    const isHomePage = path === '/';
+          const item1 = document.getElementById('item1');
+   item1.classList.toggle('text-black', !isHomePage);
+   item1.classList.toggle('text-white', isHomePage);
+       const item2 = document.getElementById('item2');
+   item2.classList.toggle('text-black', !isHomePage);
+   item2.classList.toggle('text-white', isHomePage);
+        const navLinks = document.querySelectorAll('#main-nav a');
+    navLinks.forEach(link => {
+      link.classList.toggle('text-black', !isHomePage);
+      link.classList.toggle('text-white', isHomePage);
+    });
+
+
+  window.addEventListener('scroll', () => {
+    isScrolled = window.scrollY > 50;
+    const header = document.querySelector('header');
+    header.classList.toggle('scrolled', isScrolled);
+    header.classList.toggle('shadow-2xl', isScrolled);
+    header.classList.toggle('bg-white', isScrolled);
+
+
+    const path = window.location.pathname;
+    const isHomePage = path === '/';
+    if (isHomePage){
+          const item1 = document.getElementById('item1');
+    item1.classList.toggle('text-black', isScrolled);
+    item1.classList.toggle('text-white', !isScrolled);
+        const item2 = document.getElementById('item2');
+    item2.classList.toggle('text-black', isScrolled);
+    item2.classList.toggle('text-white', !isScrolled);
+    const navLinks = document.querySelectorAll('#main-nav a');
+    navLinks.forEach(link => {
+      link.classList.toggle('text-black', isScrolled);
+      link.classList.toggle('text-white', !isScrolled);
+    });
+    }
+
+  });
+</script>  <section class="mt-20 p-6"> <article class="mx-auto max-w-6xl "> <div class="prose prose-lg " id="blog"> <div class="title"> <div class="date"> <time datetime="2025-08-01T00:00:00.000Z">Aug 1, 2025</time>  </div> <h1>Setting up a Distributed System with Redundancy using Vite + React, FastAPI, RabbitMQ, and Keycloak</h1> <h2 class="text-lg!">Learn how to build a scalable, redundant distributed system with React, FastAPI, RabbitMQ, and Keycloak. Covers architecture, authentication, communication, and deployment.</h2> <hr> </div> <h1 id="building-a-distributed-system-with-vite--react-fastapi-rabbitmq-and-keycloak">Building a Distributed System with Vite + React, FastAPI, RabbitMQ, and Keycloak</h1>
+<h2 id="introduction">Introduction</h2>
+<p>Modern applications must be resilient, secure, and scalable. This blog post walks you through setting up a <strong>redundant distributed system</strong> using a modern frontend with <strong>Vite + React</strong>, a scalable backend with <strong>FastAPI</strong>, asynchronous communication via <strong>RabbitMQ</strong>, and <strong>Keycloak</strong> for centralized authentication and access control.</p>
+<p>We’ll address architecture, redundancy, frontend/backend communication, authentication, and deployment.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#system-architecture-overview">System Architecture Overview</a></li>
+<li><a href="#frontend-setup-with-vite--react">Frontend Setup with Vite + React</a></li>
+<li><a href="#backend-setup-with-fastapi">Backend Setup with FastAPI</a></li>
+<li><a href="#backend-communication-via-rabbitmq">Backend Communication via RabbitMQ</a></li>
+<li><a href="#authentication-and-access-control-with-keycloak">Authentication and Access Control with Keycloak</a></li>
+<li><a href="#high-availability-and-fault-tolerance">High Availability and Fault Tolerance</a></li>
+<li><a href="#deployment-and-orchestration">Deployment and Orchestration</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#references">References</a></li>
+</ul>
+<h2 id="system-architecture-overview">System Architecture Overview</h2>
+<h3 id="redundant-system-design">Redundant System Design</h3>
+<p>To achieve true redundancy, each critical component of the system (frontend, backend, message broker, and auth server) must be deployed in multiple instances. This ensures that if one instance fails, others can take over without service interruption. Load balancers are used to distribute traffic evenly and detect failures.</p>
+<p>The system consists of:</p>
+<ul>
+<li>Multiple frontend (React) and backend (FastAPI) instances</li>
+<li>A reverse proxy (e.g., NGINX, Traefik) for load balancing</li>
+<li>RabbitMQ cluster for async messaging</li>
+<li>Keycloak for centralized user authentication</li>
+</ul>
+<h3 id="logical-separation-of-concerns">Logical Separation of Concerns</h3>
+<p>Each part of the system is responsible for a well-defined set of operations. This division promotes scalability and eases debugging. By decoupling UI, logic, and infrastructure, teams can work in parallel and optimize each service independently.</p>
+<ul>
+<li><strong>Frontend (Client)</strong>: Handles UI, user sessions, and requests to the backend.</li>
+<li><strong>Backend (Application Server)</strong>: Processes business logic, API, WebSocket endpoints.</li>
+<li><strong>Infrastructure Services</strong>: RabbitMQ (messaging), Keycloak (auth), PostgreSQL/Redis (optional).</li>
+</ul>
+<h2 id="frontend-setup-with-vite--react">Frontend Setup with Vite + React</h2>
+<h3 id="vite-project-configuration">Vite Project Configuration</h3>
+<p>Instead of creating a new Vite project from scratch, we use a custom frontend project developed specifically for this chat application: AbelGRubio/frontend-chat. This project is already pre-configured with React, socket integration, and authentication logic.</p>
+<p>To get started, simply clone the repository and install the dependencies:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">git</span><span style="color:#9ECBFF"> clone</span><span style="color:#9ECBFF"> https://github.com/AbelGRubio/frontend-chat.git</span></span>
+<span class="line"><span style="color:#79B8FF">cd</span><span style="color:#9ECBFF"> frontend-chat</span></span>
+<span class="line"><span style="color:#B392F0">npm</span><span style="color:#9ECBFF"> install</span></span>
+<span class="line"><span style="color:#B392F0">npm</span><span style="color:#9ECBFF"> run</span><span style="color:#9ECBFF"> dev</span></span></code></pre>
+<h3 id="redundant-deployment-practices">Redundant Deployment Practices</h3>
+<p>In distributed deployments, multiple frontend replicas should serve static assets. Tools like NGINX or cloud load balancers can balance traffic between them. Ensure that cache busting and versioning are properly configured so that clients always receive up-to-date files.</p>
+<ul>
+<li>Build with <code>vite build</code></li>
+<li>Serve via multiple NGINX containers behind a load balancer</li>
+<li>Use CDN or shared storage for static file sync</li>
+</ul>
+<h3 id="authenticated-requests">Authenticated Requests</h3>
+<p>Use <code>axios</code> or <code>fetch</code> with the token from Keycloak:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="ts"><code><span class="line"><span style="color:#F97583">const</span><span style="color:#79B8FF"> token</span><span style="color:#F97583"> =</span><span style="color:#E1E4E8"> keycloak.token;</span></span>
+<span class="line"><span style="color:#E1E4E8">axios.</span><span style="color:#B392F0">get</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">&#39;/api/data&#39;</span><span style="color:#E1E4E8">, {</span></span>
+<span class="line"><span style="color:#E1E4E8">  headers: { Authorization: </span><span style="color:#9ECBFF">`Bearer ${</span><span style="color:#E1E4E8">token</span><span style="color:#9ECBFF">}`</span><span style="color:#E1E4E8"> }</span></span>
+<span class="line"><span style="color:#E1E4E8">});</span></span></code></pre>
+<h3 id="keycloak-integration">Keycloak Integration</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">npm</span><span style="color:#9ECBFF"> install</span><span style="color:#9ECBFF"> keycloak-js</span></span></code></pre>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="tsx"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> { Keycloak } </span><span style="color:#F97583">from</span><span style="color:#9ECBFF"> &#39;keycloak-js&#39;</span><span style="color:#E1E4E8">;</span></span></code></pre>
+<p>Use <code>keycloak-js</code> config in a shared <code>keycloak.ts</code> file.</p>
+<h2 id="backend-setup-with-fastapi">Backend Setup with FastAPI</h2>
+<p>This is the backend service for the chat application, designed to work alongside the frontend project: AbelGRubio/frontend-chat. Built with FastAPI, this backend handles:</p>
+<ul>
+<li>WebSocket connections for real-time messaging</li>
+<li>User session tracking</li>
+<li>Authentication integration (compatible with Keycloak or token-based auth)</li>
+<li>Scalable architecture suitable for containerization and deployment</li>
+</ul>
+<p>It provides all necessary APIs and WebSocket endpoints to support the interactive chat features on the frontend.</p>
+<h3 id="running-fastapi-instances">Running FastAPI Instances</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">uvicorn</span><span style="color:#9ECBFF"> app.main:app</span><span style="color:#79B8FF"> --host</span><span style="color:#79B8FF"> 0.0.0.0</span><span style="color:#79B8FF"> --port</span><span style="color:#79B8FF"> 8000</span><span style="color:#79B8FF"> --workers</span><span style="color:#79B8FF"> 4</span></span></code></pre>
+<p>or</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">gunicorn</span><span style="color:#79B8FF"> -k</span><span style="color:#9ECBFF"> uvicorn.workers.UvicornWorker</span><span style="color:#9ECBFF"> app.main:app</span></span></code></pre>
+<h3 id="rest--websocket-endpoints">REST &amp; WebSocket Endpoints</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#B392F0">@app.get</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">&quot;/data&quot;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">async</span><span style="color:#F97583"> def</span><span style="color:#B392F0"> get_data</span><span style="color:#E1E4E8">(): </span><span style="color:#F97583">return</span><span style="color:#E1E4E8"> {</span><span style="color:#9ECBFF">&quot;status&quot;</span><span style="color:#E1E4E8">: </span><span style="color:#9ECBFF">&quot;ok&quot;</span><span style="color:#E1E4E8">}</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">@app.websocket</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">&quot;/ws&quot;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">async</span><span style="color:#F97583"> def</span><span style="color:#B392F0"> websocket_endpoint</span><span style="color:#E1E4E8">(ws: WebSocket):</span></span>
+<span class="line"><span style="color:#F97583">    await</span><span style="color:#E1E4E8"> ws.accept()</span></span>
+<span class="line"><span style="color:#F97583">    await</span><span style="color:#E1E4E8"> ws.send_text(</span><span style="color:#9ECBFF">&quot;Connected&quot;</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<h3 id="jwt-validation-via-dependency">JWT Validation via Dependency</h3>
+<p>This approach uses a custom middleware to decode and verify tokens issued by Keycloak, enabling seamless integration with FastAPI while supporting role-based access control. Each endpoint can rely on the middleware to ensure authentication, simplifying the enforcement of security policies across the application.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> fastapi </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> Request</span></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> fastapi.responses </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> JSONResponse</span></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> starlette.middleware.base </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> BaseHTTPMiddleware, RequestResponseEndpoint</span></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> starlette.responses </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> Response</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> ..configuration </span><span style="color:#F97583">import</span><span style="color:#79B8FF"> KEYCLOAK_OPENID</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> AuthMiddleware</span><span style="color:#E1E4E8">(</span><span style="color:#B392F0">BaseHTTPMiddleware</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#9ECBFF">    &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#9ECBFF">    Middleware to handle authentication for incoming HTTP requests.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF">    This middleware intercepts requests and determines if they need</span></span>
+<span class="line"><span style="color:#9ECBFF">    authentication based on a predefined list of paths that can bypass</span></span>
+<span class="line"><span style="color:#9ECBFF">    authentication (e.g., docs, health check).</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF">    If authentication is required, it checks for the presence of a valid API</span></span>
+<span class="line"><span style="color:#9ECBFF">    key or a valid authorization token (JWT), decoding it via Keycloak OpenID</span></span>
+<span class="line"><span style="color:#9ECBFF">    service.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF">    Attributes:</span></span>
+<span class="line"><span style="color:#9ECBFF">        __jump_paths__ (list): List of URL paths that do not require</span></span>
+<span class="line"><span style="color:#9ECBFF">        authentication.</span></span>
+<span class="line"><span style="color:#9ECBFF">        __auth__ (str): Header key name for authorization token.</span></span>
+<span class="line"><span style="color:#9ECBFF">    &quot;&quot;&quot;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    __jump_paths__ </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [</span><span style="color:#9ECBFF">&#39;/docs&#39;</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">&#39;/openapi.json&#39;</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">&#39;/redoc&#39;</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#9ECBFF">                      &#39;/health&#39;</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">&#39;/favicon.ico&#39;</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#E1E4E8">    __auth__ </span><span style="color:#F97583">=</span><span style="color:#9ECBFF"> &#39;authorization&#39;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#79B8FF"> __init__</span><span style="color:#E1E4E8">(self, </span><span style="color:#F97583">*</span><span style="color:#E1E4E8">args, </span><span style="color:#F97583">**</span><span style="color:#E1E4E8">kwargs):</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#9ECBFF">        Initialize the middleware by calling the parent class initializer.</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#79B8FF">        super</span><span style="color:#E1E4E8">().</span><span style="color:#79B8FF">__init__</span><span style="color:#E1E4E8">(</span><span style="color:#F97583">*</span><span style="color:#E1E4E8">args, </span><span style="color:#F97583">**</span><span style="color:#E1E4E8">kwargs)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#B392F0">    @</span><span style="color:#79B8FF">staticmethod</span></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> unauthorised</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            code: </span><span style="color:#79B8FF">int</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 401</span><span style="color:#E1E4E8">, msg: </span><span style="color:#79B8FF">str</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> &#39;Unauthorised&#39;</span><span style="color:#E1E4E8">) -&gt; JSONResponse:</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#9ECBFF">        Return a JSON response indicating an unauthorized access attempt.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF">        :param code: HTTP status code to return (default 401).</span></span>
+<span class="line"><span style="color:#9ECBFF">        :param msg: Message to include in the response body</span></span>
+<span class="line"><span style="color:#9ECBFF">        (default &#39;Unauthorised&#39;).</span></span>
+<span class="line"><span style="color:#9ECBFF">        :return: JSONResponse with status code and message.</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> JSONResponse(</span><span style="color:#FFAB70">status_code</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">code, </span><span style="color:#FFAB70">content</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">msg)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> _is_jump_url_</span><span style="color:#E1E4E8">(self, request: Request) -&gt; </span><span style="color:#79B8FF">bool</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#9ECBFF">        Check if the requested URL path is in the list of paths that do not</span></span>
+<span class="line"><span style="color:#9ECBFF">        require auth.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF">        :param request: The incoming HTTP request.</span></span>
+<span class="line"><span style="color:#9ECBFF">        :return: True if the path should bypass authentication, False otherwise.</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> request.url.path </span><span style="color:#F97583">in</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.__jump_paths__</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> decode_token</span><span style="color:#E1E4E8">(self, token: </span><span style="color:#79B8FF">str</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#9ECBFF">        Decode a JWT token after stripping &#39;Bearer &#39; prefix.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF">        :param token: Raw token string from the authorization header.</span></span>
+<span class="line"><span style="color:#9ECBFF">        :return: Decoded token payload (usually a dict).</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">        token_ </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> token.replace(</span><span style="color:#9ECBFF">&#39;Bearer &#39;</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">&#39;&#39;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">        payload </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> KEYCLOAK_OPENID</span><span style="color:#E1E4E8">.decode_token(token_)</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> payload</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> get_header_token</span><span style="color:#E1E4E8">(self, request: Request) -&gt; </span><span style="color:#79B8FF">str</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#9ECBFF">        Get the authorization token from the request headers.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF">        :param request: The incoming HTTP request.</span></span>
+<span class="line"><span style="color:#9ECBFF">        :return: Authorization header value or empty string if missing.</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> request.headers.get(</span><span style="color:#79B8FF">self</span><span style="color:#E1E4E8">.__auth__, </span><span style="color:#9ECBFF">&#39;&#39;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> get_user_config</span><span style="color:#E1E4E8">(self, request: Request) -&gt; </span><span style="color:#79B8FF">dict</span><span style="color:#F97583"> |</span><span style="color:#79B8FF"> None</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#9ECBFF">        Extract user configuration by decoding the JWT token from the request.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF">        :param request: The incoming HTTP request.</span></span>
+<span class="line"><span style="color:#9ECBFF">        :return: Decoded token payload dict if valid, else None.</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">        token </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.get_header_token(request)</span></span>
+<span class="line"><span style="color:#F97583">        try</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">            decode_token </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.decode_token(token)</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> decode_token</span></span>
+<span class="line"><span style="color:#F97583">        except</span><span style="color:#79B8FF"> Exception</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#79B8FF"> None</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> is_auth</span><span style="color:#E1E4E8">(self, request: Request) -&gt; </span><span style="color:#79B8FF">dict</span><span style="color:#F97583"> |</span><span style="color:#79B8FF"> None</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#9ECBFF">        Check whether the request is authenticated.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF">        Currently implemented by trying to get user config from token.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF">        :param request: The incoming HTTP request.</span></span>
+<span class="line"><span style="color:#9ECBFF">        :return: User configuration dict if authenticated, else None.</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.get_user_config(request)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    async</span><span style="color:#F97583"> def</span><span style="color:#B392F0"> dispatch</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">        self, request: Request, call_next: RequestResponseEndpoint</span></span>
+<span class="line"><span style="color:#E1E4E8">    ) -&gt; Response:</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#9ECBFF">        Process incoming HTTP request, enforcing authentication if required.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF">        If the request path is in the bypass list, it proceeds without checks.</span></span>
+<span class="line"><span style="color:#9ECBFF">        Otherwise, it verifies authentication and returns an unauthorized</span></span>
+<span class="line"><span style="color:#9ECBFF">        response if authentication fails.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF">        :param request: The incoming HTTP request.</span></span>
+<span class="line"><span style="color:#9ECBFF">        :param call_next: The next middleware or request handler callable.</span></span>
+<span class="line"><span style="color:#9ECBFF">        :return: Response from next handler or unauthorized response.</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">._is_jump_url_(request):</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#F97583"> await</span><span style="color:#E1E4E8"> call_next(request)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">        response </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.unauthorised()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.is_auth(request):</span></span>
+<span class="line"><span style="color:#E1E4E8">            response </span><span style="color:#F97583">=</span><span style="color:#F97583"> await</span><span style="color:#E1E4E8"> call_next(request)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> response</span></span>
+<span class="line"></span></code></pre>
+<h2 id="backend-communication-via-rabbitmq">Backend Communication via RabbitMQ</h2>
+<h3 id="install-rabbitmq-cluster">Install RabbitMQ Cluster</h3>
+<p>Use Docker or Kubernetes with clustered config:</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="bash"><code><span class="line"><span style="color:#B392F0">docker</span><span style="color:#9ECBFF"> run</span><span style="color:#79B8FF"> -d</span><span style="color:#79B8FF"> --hostname</span><span style="color:#9ECBFF"> rabbit1</span><span style="color:#79B8FF"> --name</span><span style="color:#9ECBFF"> rabbit1</span><span style="color:#79B8FF"> -p</span><span style="color:#9ECBFF"> 5672:5672</span><span style="color:#79B8FF"> -p</span><span style="color:#9ECBFF"> 15672:15672</span><span style="color:#9ECBFF"> rabbitmq:3-management</span></span></code></pre>
+<h3 id="async-messaging-with-aio-pika">Async Messaging with aio-pika</h3>
+<p>We use a custom RabbitMQ manager to handle connection and disconnection events in a controlled and centralized way. This allows us to maintain a reliable asynchronous messaging flow using aio-pika, ensuring that resources are properly managed and reconnections are handled gracefully when needed.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> asyncio</span></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> typing </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> Optional</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> aio_pika </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> connect, Message, Channel, Queue</span></span>
+<span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> aio_pika.exceptions </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> AMQPConnectionError</span></span>
+<span class="line"></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">class</span><span style="color:#B392F0"> RabbitMQManager</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#9ECBFF">    &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#9ECBFF">    Asynchronous manager for interacting with RabbitMQ using `aio-pika`.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF">    This class provides functionality to connect, publish, and consume</span></span>
+<span class="line"><span style="color:#9ECBFF">    messages from RabbitMQ queues or exchanges. It includes built-in</span></span>
+<span class="line"><span style="color:#9ECBFF">    retry logic and optional WebSocket broadcasting support for</span></span>
+<span class="line"><span style="color:#9ECBFF">    real-time notifications.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF">    :param rabbitmq_url: Connection URL for RabbitMQ.</span></span>
+<span class="line"><span style="color:#9ECBFF">    :param manager: WebSocket manager instance used for broadcasting messages</span></span>
+<span class="line"><span style="color:#9ECBFF">    to clients.</span></span>
+<span class="line"><span style="color:#9ECBFF">    :param max_retries: Maximum number of retry attempts for connecting to</span></span>
+<span class="line"><span style="color:#9ECBFF">    RabbitMQ.</span></span>
+<span class="line"><span style="color:#9ECBFF">    :param logger: Optional logger for debug and error logging.</span></span>
+<span class="line"><span style="color:#9ECBFF">    &quot;&quot;&quot;</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#79B8FF"> __init__</span><span style="color:#E1E4E8">(self, rabbitmq_url: </span><span style="color:#79B8FF">str</span><span style="color:#E1E4E8">, manager, max_retries: </span><span style="color:#79B8FF">int</span><span style="color:#F97583"> =</span><span style="color:#79B8FF"> 3</span><span style="color:#E1E4E8">,</span></span>
+<span class="line"><span style="color:#E1E4E8">                 logger</span><span style="color:#F97583">=</span><span style="color:#79B8FF">None</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#79B8FF">        self</span><span style="color:#E1E4E8">.rabbitmq_url </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> rabbitmq_url</span></span>
+<span class="line"><span style="color:#79B8FF">        self</span><span style="color:#E1E4E8">.manager </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> manager</span></span>
+<span class="line"><span style="color:#79B8FF">        self</span><span style="color:#E1E4E8">.max_retries </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> max_retries</span></span>
+<span class="line"><span style="color:#79B8FF">        self</span><span style="color:#E1E4E8">.connection </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> None</span></span>
+<span class="line"><span style="color:#79B8FF">        self</span><span style="color:#E1E4E8">.channel: Optional[Channel] </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> None</span></span>
+<span class="line"><span style="color:#79B8FF">        self</span><span style="color:#E1E4E8">.queue: Optional[Queue] </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> None</span></span>
+<span class="line"><span style="color:#79B8FF">        self</span><span style="color:#E1E4E8">.logger </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> logger</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    async</span><span style="color:#F97583"> def</span><span style="color:#B392F0"> connect</span><span style="color:#E1E4E8">(self) -&gt; </span><span style="color:#79B8FF">bool</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#9ECBFF">        Attempt to establish a connection with RabbitMQ, retrying on failure.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF">        :return: True if the connection is successful, False otherwise.</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#F97583">        for</span><span style="color:#E1E4E8"> attempt </span><span style="color:#F97583">in</span><span style="color:#79B8FF"> range</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">self</span><span style="color:#E1E4E8">.max_retries):</span></span>
+<span class="line"><span style="color:#F97583">            try</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#79B8FF">                self</span><span style="color:#E1E4E8">.connection </span><span style="color:#F97583">=</span><span style="color:#F97583"> await</span><span style="color:#E1E4E8"> connect(</span><span style="color:#79B8FF">self</span><span style="color:#E1E4E8">.rabbitmq_url)</span></span>
+<span class="line"><span style="color:#79B8FF">                self</span><span style="color:#E1E4E8">.channel </span><span style="color:#F97583">=</span><span style="color:#F97583"> await</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.connection.channel()</span></span>
+<span class="line"><span style="color:#F97583">                return</span><span style="color:#79B8FF"> True</span></span>
+<span class="line"><span style="color:#F97583">            except</span><span style="color:#E1E4E8"> AMQPConnectionError </span><span style="color:#F97583">as</span><span style="color:#E1E4E8"> e:</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.logger:</span></span>
+<span class="line"><span style="color:#79B8FF">                    self</span><span style="color:#E1E4E8">.logger.warning(</span><span style="color:#F97583">f</span><span style="color:#9ECBFF">&quot;Attempt </span><span style="color:#79B8FF">{</span><span style="color:#E1E4E8">attempt </span><span style="color:#F97583">+</span><span style="color:#79B8FF"> 1}</span><span style="color:#9ECBFF"> failed: </span><span style="color:#79B8FF">{</span><span style="color:#E1E4E8">e</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">&quot;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">                await</span><span style="color:#E1E4E8"> asyncio.sleep(</span><span style="color:#79B8FF">2</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">        await</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.manager.broadcast(</span><span style="color:#9ECBFF">&quot;Redundancy service is not available.&quot;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#79B8FF"> False</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    async</span><span style="color:#F97583"> def</span><span style="color:#B392F0"> publish_message</span><span style="color:#E1E4E8">(self, queue_name: </span><span style="color:#79B8FF">str</span><span style="color:#E1E4E8">, message: </span><span style="color:#79B8FF">str</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#9ECBFF">        Publish a message to a RabbitMQ queue.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF">        :param queue_name: Name of the target queue.</span></span>
+<span class="line"><span style="color:#9ECBFF">        :param message: The message string to publish.</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#F97583"> not</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.channel:</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.logger:</span></span>
+<span class="line"><span style="color:#79B8FF">                self</span><span style="color:#E1E4E8">.logger.warning(</span></span>
+<span class="line"><span style="color:#9ECBFF">                    &quot;No RabbitMQ channel available. Attempting to reconnect...&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">                )</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#F97583"> not</span><span style="color:#F97583"> await</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.connect():</span></span>
+<span class="line"><span style="color:#F97583">                return</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        try</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">            await</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.channel.default_exchange.publish(</span></span>
+<span class="line"><span style="color:#E1E4E8">                Message(</span><span style="color:#FFAB70">body</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">message.encode()),</span></span>
+<span class="line"><span style="color:#FFAB70">                routing_key</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">queue_name,</span></span>
+<span class="line"><span style="color:#E1E4E8">            )</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.logger:</span></span>
+<span class="line"><span style="color:#79B8FF">                self</span><span style="color:#E1E4E8">.logger.debug(</span></span>
+<span class="line"><span style="color:#F97583">                    f</span><span style="color:#9ECBFF">&quot;Message published to </span><span style="color:#79B8FF">{</span><span style="color:#E1E4E8">queue_name</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">: </span><span style="color:#79B8FF">{</span><span style="color:#E1E4E8">message</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">&quot;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">        except</span><span style="color:#79B8FF"> Exception</span><span style="color:#F97583"> as</span><span style="color:#E1E4E8"> e:</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.logger:</span></span>
+<span class="line"><span style="color:#79B8FF">                self</span><span style="color:#E1E4E8">.logger.error(</span><span style="color:#F97583">f</span><span style="color:#9ECBFF">&quot;Failed to publish message: </span><span style="color:#79B8FF">{</span><span style="color:#E1E4E8">e</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">&quot;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    async</span><span style="color:#F97583"> def</span><span style="color:#B392F0"> publish_message_to_exchange</span><span style="color:#E1E4E8">(</span></span>
+<span class="line"><span style="color:#E1E4E8">            self, exchange_name: </span><span style="color:#79B8FF">str</span><span style="color:#E1E4E8">, message: </span><span style="color:#79B8FF">str</span><span style="color:#E1E4E8">, routing_key: </span><span style="color:#79B8FF">str</span><span style="color:#F97583"> =</span><span style="color:#9ECBFF"> &#39;&#39;</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#9ECBFF">        Publish a message to a RabbitMQ exchange.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF">        :param exchange_name: Name of the exchange.</span></span>
+<span class="line"><span style="color:#9ECBFF">        :param message: The message string to publish.</span></span>
+<span class="line"><span style="color:#9ECBFF">        :param routing_key: Optional routing key.</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#F97583"> not</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.channel:</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.logger:</span></span>
+<span class="line"><span style="color:#79B8FF">                self</span><span style="color:#E1E4E8">.logger.warning(</span></span>
+<span class="line"><span style="color:#9ECBFF">                    &quot;No RabbitMQ channel available. Attempting to reconnect...&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">                )</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#F97583"> not</span><span style="color:#F97583"> await</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.connect():</span></span>
+<span class="line"><span style="color:#F97583">                return</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        try</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">            exchange </span><span style="color:#F97583">=</span><span style="color:#F97583"> await</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.channel.declare_exchange(</span></span>
+<span class="line"><span style="color:#E1E4E8">                exchange_name, </span><span style="color:#FFAB70">type</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&#39;fanout&#39;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">            await</span><span style="color:#E1E4E8"> exchange.publish(</span></span>
+<span class="line"><span style="color:#E1E4E8">                Message(</span><span style="color:#FFAB70">body</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">message.encode()),</span></span>
+<span class="line"><span style="color:#FFAB70">                routing_key</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">routing_key</span></span>
+<span class="line"><span style="color:#E1E4E8">            )</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.logger:</span></span>
+<span class="line"><span style="color:#79B8FF">                self</span><span style="color:#E1E4E8">.logger.debug(</span></span>
+<span class="line"><span style="color:#F97583">                    f</span><span style="color:#9ECBFF">&quot;Message published to exchange &quot;</span></span>
+<span class="line"><span style="color:#F97583">                    f</span><span style="color:#9ECBFF">&quot;</span><span style="color:#79B8FF">{</span><span style="color:#E1E4E8">exchange_name</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">: </span><span style="color:#79B8FF">{</span><span style="color:#E1E4E8">message</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">&quot;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">        except</span><span style="color:#79B8FF"> Exception</span><span style="color:#F97583"> as</span><span style="color:#E1E4E8"> e:</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.logger:</span></span>
+<span class="line"><span style="color:#79B8FF">                self</span><span style="color:#E1E4E8">.logger.error(</span></span>
+<span class="line"><span style="color:#F97583">                    f</span><span style="color:#9ECBFF">&quot;Failed to publish message to exchange: </span><span style="color:#79B8FF">{</span><span style="color:#E1E4E8">e</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">&quot;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    async</span><span style="color:#F97583"> def</span><span style="color:#B392F0"> consume_messages</span><span style="color:#E1E4E8">(self, queue_name: </span><span style="color:#79B8FF">str</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#9ECBFF">        Consume messages from a RabbitMQ queue and broadcast them via</span></span>
+<span class="line"><span style="color:#9ECBFF">        WebSockets.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF">        :param queue_name: Name of the queue to consume from.</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#F97583"> not</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.channel:</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.logger:</span></span>
+<span class="line"><span style="color:#79B8FF">                self</span><span style="color:#E1E4E8">.logger.warning(</span></span>
+<span class="line"><span style="color:#9ECBFF">                    &quot;No RabbitMQ channel available. Attempting to reconnect...&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">                )</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#F97583"> not</span><span style="color:#F97583"> await</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.connect():</span></span>
+<span class="line"><span style="color:#F97583">                return</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        try</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#79B8FF">            self</span><span style="color:#E1E4E8">.queue </span><span style="color:#F97583">=</span><span style="color:#F97583"> await</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.channel.declare_queue(</span></span>
+<span class="line"><span style="color:#E1E4E8">                queue_name, </span><span style="color:#FFAB70">durable</span><span style="color:#F97583">=</span><span style="color:#79B8FF">True</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">            async</span><span style="color:#F97583"> for</span><span style="color:#E1E4E8"> message </span><span style="color:#F97583">in</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.queue:</span></span>
+<span class="line"><span style="color:#F97583">                async</span><span style="color:#F97583"> with</span><span style="color:#E1E4E8"> message.process():</span></span>
+<span class="line"><span style="color:#F97583">                    if</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.logger:</span></span>
+<span class="line"><span style="color:#79B8FF">                        self</span><span style="color:#E1E4E8">.logger.debug(</span></span>
+<span class="line"><span style="color:#F97583">                            f</span><span style="color:#9ECBFF">&quot;Received message: </span><span style="color:#79B8FF">{</span><span style="color:#E1E4E8">message.body.decode()</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">&quot;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">                    await</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.manager.broadcast(message.body.decode())</span></span>
+<span class="line"><span style="color:#F97583">        except</span><span style="color:#79B8FF"> Exception</span><span style="color:#F97583"> as</span><span style="color:#E1E4E8"> e:</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.logger:</span></span>
+<span class="line"><span style="color:#79B8FF">                self</span><span style="color:#E1E4E8">.logger.error(</span><span style="color:#F97583">f</span><span style="color:#9ECBFF">&quot;Failed to consume messages: </span><span style="color:#79B8FF">{</span><span style="color:#E1E4E8">e</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">&quot;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">            await</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.manager.broadcast(</span></span>
+<span class="line"><span style="color:#9ECBFF">                &quot;Redundancy service is not available.&quot;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">    async</span><span style="color:#F97583"> def</span><span style="color:#B392F0"> consume_messages_from_exchange</span><span style="color:#E1E4E8">(self, exchange_name: </span><span style="color:#79B8FF">str</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#9ECBFF">        Consume messages from a RabbitMQ exchange and broadcast them via</span></span>
+<span class="line"><span style="color:#9ECBFF">        WebSockets.</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#9ECBFF">        :param exchange_name: Name of the exchange to consume from.</span></span>
+<span class="line"><span style="color:#9ECBFF">        &quot;&quot;&quot;</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#F97583"> not</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.channel:</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.logger:</span></span>
+<span class="line"><span style="color:#79B8FF">                self</span><span style="color:#E1E4E8">.logger.warning(</span></span>
+<span class="line"><span style="color:#9ECBFF">                    &quot;No RabbitMQ channel available. Attempting to reconnect...&quot;</span></span>
+<span class="line"><span style="color:#E1E4E8">                )</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#F97583"> not</span><span style="color:#F97583"> await</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.connect():</span></span>
+<span class="line"><span style="color:#F97583">                return</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">        try</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">            exchange </span><span style="color:#F97583">=</span><span style="color:#F97583"> await</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.channel.declare_exchange(</span></span>
+<span class="line"><span style="color:#E1E4E8">                exchange_name, </span><span style="color:#FFAB70">type</span><span style="color:#F97583">=</span><span style="color:#9ECBFF">&#39;fanout&#39;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">            queue </span><span style="color:#F97583">=</span><span style="color:#F97583"> await</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.channel.declare_queue(</span><span style="color:#9ECBFF">&#39;&#39;</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">exclusive</span><span style="color:#F97583">=</span><span style="color:#79B8FF">True</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">            await</span><span style="color:#E1E4E8"> queue.bind(exchange)</span></span>
+<span class="line"><span style="color:#F97583">            async</span><span style="color:#F97583"> for</span><span style="color:#E1E4E8"> message </span><span style="color:#F97583">in</span><span style="color:#E1E4E8"> queue:</span></span>
+<span class="line"><span style="color:#F97583">                async</span><span style="color:#F97583"> with</span><span style="color:#E1E4E8"> message.process():</span></span>
+<span class="line"><span style="color:#F97583">                    await</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.manager.broadcast(message.body.decode())</span></span>
+<span class="line"><span style="color:#F97583">        except</span><span style="color:#79B8FF"> Exception</span><span style="color:#F97583"> as</span><span style="color:#E1E4E8"> e:</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.logger:</span></span>
+<span class="line"><span style="color:#79B8FF">                self</span><span style="color:#E1E4E8">.logger.error(</span></span>
+<span class="line"><span style="color:#F97583">                    f</span><span style="color:#9ECBFF">&quot;Failed to consume messages from exchange: </span><span style="color:#79B8FF">{</span><span style="color:#E1E4E8">e</span><span style="color:#79B8FF">}</span><span style="color:#9ECBFF">&quot;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">            await</span><span style="color:#79B8FF"> self</span><span style="color:#E1E4E8">.manager.broadcast(</span></span>
+<span class="line"><span style="color:#9ECBFF">                &quot;Redundancy service is not available.&quot;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span></code></pre>
+<h3 id="messaging-patterns">Messaging Patterns</h3>
+<p>Each pattern fits different communication needs:</p>
+<ul>
+<li>
+<p><code>fanout</code>: useful for broadcasting logs or system-wide notifications.</p>
+</li>
+<li>
+<p><code>topic</code>: suitable for routing messages to multiple services based on tags.</p>
+</li>
+<li>
+<p><code>direct</code>: appropriate when a message should reach only a specific queue.</p>
+</li>
+<li>
+<p><strong>fanout</strong>: broadcast to multiple services</p>
+</li>
+<li>
+<p><strong>topic</strong>: pattern-based routing</p>
+</li>
+<li>
+<p><strong>direct</strong>: specific consumer routing</p>
+</li>
+</ul>
+<h2 id="authentication-and-access-control-with-keycloak">Authentication and Access Control with Keycloak</h2>
+<h3 id="high-availability-setup">High Availability Setup</h3>
+<ul>
+<li>Use external DB (PostgreSQL)</li>
+<li>Behind a reverse proxy (NGINX)</li>
+<li>Cluster mode with multiple instances</li>
+</ul>
+<h3 id="realm-and-role-management">Realm and Role Management</h3>
+<p>Realms in Keycloak isolate authentication domains, ideal for multi-tenant apps. Clients represent services or apps, and roles define what actions users can perform. This setup enables flexible, centralized access control.</p>
+<ul>
+<li>Create realm <code>chat</code></li>
+<li>Add client <code>frontend</code> and <code>backend</code></li>
+<li>Define roles like <code>admin</code>, <code>user</code> as you desire.</li>
+</ul>
+<h3 id="token-handling">Token Handling</h3>
+<ul>
+<li><strong>Frontend</strong>: refresh token automatically using <code>@react-keycloak</code></li>
+<li><strong>Backend</strong>: validate with <code>pyjwt</code> and cache JWKs</li>
+</ul>
+<h2 id="high-availability-and-fault-tolerance">High Availability and Fault Tolerance</h2>
+<h3 id="horizontal-scaling">Horizontal Scaling</h3>
+<p>Scaling horizontally means adding more instances rather than increasing resources of a single one. Stateless applications scale easily—ensure that sessions, if used, are stored in external stores like Redis.</p>
+<ul>
+<li>Scale containers (Kubernetes replicas or Docker Compose services)</li>
+<li>Stateless frontend/backend</li>
+</ul>
+<h3 id="health-checks">Health Checks</h3>
+<p>Readiness and liveness probes ensure that containers are only included in load balancing when they are actually ready, and restarted if they become unresponsive. This contributes greatly to fault tolerance and smooth deployment rollouts.</p>
+<ul>
+<li>FastAPI: <code>/health</code> endpoint</li>
+<li>NGINX / Kubernetes readiness probes</li>
+</ul>
+<h3 id="resilience-patterns">Resilience Patterns</h3>
+<ul>
+<li>Use <code>tenacity</code> for retries</li>
+<li>Apply timeout middleware</li>
+<li>Circuit breakers via <code>pybreaker</code> or custom</li>
+</ul>
+<h2 id="deployment-and-orchestration">Deployment and Orchestration</h2>
+<h3 id="dockerization">Dockerization</h3>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="plaintext"><code><span class="line"><span>version: &#39;3.9&#39;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>services:</span></span>
+<span class="line"><span>  backend-1:</span></span>
+<span class="line"><span>    image: agrubio/backend-python:latest</span></span>
+<span class="line"><span>    env_file:</span></span>
+<span class="line"><span>      - .env</span></span>
+<span class="line"><span>    labels:</span></span>
+<span class="line"><span>      - &quot;traefik.enable=true&quot;</span></span>
+<span class="line"><span>      - &quot;traefik.http.routers.backend.rule=PathPrefix(`/api`)&quot;</span></span>
+<span class="line"><span>      - &quot;traefik.http.routers.backend.rule=Host(`back.localhost`)</span></span>
+<span class="line"><span>      - &quot;traefik.http.routers.backend.entrypoints=websecure&quot;</span></span>
+<span class="line"><span>      - &quot;traefik.http.routers.backend.tls=true&quot;</span></span>
+<span class="line"><span>      - &quot;traefik.http.routers.backend.tls.certresolver=letsencrypt&quot;</span></span>
+<span class="line"><span>      - &quot;traefik.http.services.backend.loadbalancer.server.port=8000&quot;</span></span>
+<span class="line"><span>    volumes:</span></span>
+<span class="line"><span>      - ./chat.db:/app/src/chat.db</span></span>
+<span class="line"><span>    networks:</span></span>
+<span class="line"><span>      - web</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  backend-2:</span></span>
+<span class="line"><span>    image: agrubio/backend-python:latest</span></span>
+<span class="line"><span>    env_file:</span></span>
+<span class="line"><span>      - .env</span></span>
+<span class="line"><span>    labels:</span></span>
+<span class="line"><span>      - &quot;traefik.enable=true&quot;</span></span>
+<span class="line"><span>      - &quot;traefik.http.routers.backend.rule=PathPrefix(`/api`)&quot;</span></span>
+<span class="line"><span>      - &quot;traefik.http.routers.backend.rule=Host(`back.localhost`)</span></span>
+<span class="line"><span>      - &quot;traefik.http.routers.backend.entrypoints=websecure&quot;</span></span>
+<span class="line"><span>      - &quot;traefik.http.routers.backend.tls=true&quot;</span></span>
+<span class="line"><span>      - &quot;traefik.http.routers.backend.tls.certresolver=letsencrypt&quot;</span></span>
+<span class="line"><span>      - &quot;traefik.http.services.backend.loadbalancer.server.port=8000&quot;</span></span>
+<span class="line"><span>    volumes:</span></span>
+<span class="line"><span>      - ./chat.db:/app/src/chat.db</span></span>
+<span class="line"><span>    networks:</span></span>
+<span class="line"><span>      - web</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  front:</span></span>
+<span class="line"><span>    image: agrubio/frontend-python:latest</span></span>
+<span class="line"><span>    env_file:</span></span>
+<span class="line"><span>      - .env</span></span>
+<span class="line"><span>    labels:</span></span>
+<span class="line"><span>      - &quot;traefik.enable=true&quot;</span></span>
+<span class="line"><span>      - &quot;traefik.http.routers.front.rule=PathPrefix(`/`)&quot;</span></span>
+<span class="line"><span>      - &quot;traefik.http.routers.front.rule=Host(`front.localhost`)</span></span>
+<span class="line"><span>      - &quot;traefik.http.routers.front.entrypoints=websecure&quot;</span></span>
+<span class="line"><span>      - &quot;traefik.http.routers.front.tls=true&quot;</span></span>
+<span class="line"><span>      - &quot;traefik.http.routers.front.tls.certresolver=letsencrypt&quot;</span></span>
+<span class="line"><span>      - &quot;traefik.http.services.front.loadbalancer.server.port=80&quot;</span></span>
+<span class="line"><span>    networks:</span></span>
+<span class="line"><span>      - web</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  rabbitmq:</span></span>
+<span class="line"><span>    image: rabbitmq:3-management</span></span>
+<span class="line"><span>    ports:</span></span>
+<span class="line"><span>      - &quot;5672:5672&quot;      # RabbitMQ</span></span>
+<span class="line"><span>      - &quot;15672:15672&quot;    # RabbitMQ Management UI</span></span>
+<span class="line"><span>    environment:</span></span>
+<span class="line"><span>      RABBITMQ_DEFAULT_USER: user</span></span>
+<span class="line"><span>      RABBITMQ_DEFAULT_PASS: password</span></span>
+<span class="line"><span>    networks:</span></span>
+<span class="line"><span>      - web</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>  traefik:</span></span>
+<span class="line"><span>    image: traefik:v3.4.0-rc1</span></span>
+<span class="line"><span>    container_name: traefik</span></span>
+<span class="line"><span>    restart: unless-stopped</span></span>
+<span class="line"><span>    ports:</span></span>
+<span class="line"><span>      - &quot;80:80&quot;</span></span>
+<span class="line"><span>      - &quot;443:443&quot;</span></span>
+<span class="line"><span>    volumes:</span></span>
+<span class="line"><span>      - ./traefik/traefik.yml:/etc/traefik/traefik.yml:ro</span></span>
+<span class="line"><span>      - ./traefik/dynamic.yml:/etc/traefik/dynamic.yml:ro</span></span>
+<span class="line"><span>      - traefik_acme:/letsencrypt/</span></span>
+<span class="line"><span>      - /var/run/docker.sock:/var/run/docker.sock</span></span>
+<span class="line"><span>    networks:</span></span>
+<span class="line"><span>      - web</span></span>
+<span class="line"><span>    labels:</span></span>
+<span class="line"><span>      - &quot;traefik.enable=true&quot;</span></span>
+<span class="line"><span>      - &quot;traefik.http.routers.traefik.rule=Host(`traefik.localhost`)&quot;</span></span>
+<span class="line"><span>      - &quot;traefik.http.routers.traefik.service=api@internal&quot;</span></span>
+<span class="line"><span>      - &quot;traefik.http.routers.traefik.entrypoints=websecure&quot;</span></span>
+<span class="line"><span>      - &quot;traefik.http.routers.traefik.tls=true&quot;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>volumes:</span></span>
+<span class="line"><span>  chat_db:</span></span>
+<span class="line"><span></span></span></code></pre>
+<h3 id="kubernetes-or-docker-compose">Kubernetes or Docker Compose</h3>
+<ul>
+<li>Define <code>services</code>, <code>volumes</code>, <code>networks</code></li>
+<li>Helm charts or <code>docker-compose.yaml</code></li>
+</ul>
+<h3 id="secrets-and-env-configs">Secrets and Env Configs</h3>
+<ul>
+<li>Use <code>.env</code> or Kubernetes Secrets</li>
+<li>Mount configs via volumes</li>
+</ul>
+<h3 id="cicd">CI/CD</h3>
+<p>CI/CD pipelines automate testing, building, and deployment. Use environment-specific branches, secrets management, and image tagging to ensure consistency and traceability between development, staging, and production.</p>
+<ul>
+<li>GitLab CI/CD or GitHub Actions</li>
+<li>Use pipelines for:
+<ul>
+<li>Testing (pytest)</li>
+<li>Docker builds</li>
+<li>Push to registry</li>
+<li>Deploy to cluster</li>
+</ul>
+</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>This architecture enables scalable, redundant, and secure applications. With Vite + React, FastAPI, RabbitMQ, and Keycloak, you gain powerful tooling to build modern distributed systems that can handle growth, failures, and strict access control.</p>
+<p>Key takeaways:</p>
+<ul>
+<li>Modularize for maintainability</li>
+<li>Offload async jobs to RabbitMQ</li>
+<li>Use Keycloak for unified auth</li>
+<li>Monitor and scale wisely</li>
+</ul>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://fastapi.tiangolo.com">FastAPI</a></li>
+<li><a href="https://vitejs.dev">Vite</a></li>
+<li><a href="https://react.dev">React</a></li>
+<li><a href="https://www.keycloak.org/documentation">Keycloak Docs</a></li>
+<li><a href="https://aio-pika.readthedocs.io/">aio-pika</a></li>
+<li><a href="https://www.rabbitmq.com">RabbitMQ</a></li>
+<li><a href="https://docs.docker.com">Docker</a></li>
+<li><a href="https://kubernetes.io">Kubernetes</a></li>
+<li><a href="https://prometheus.io">Prometheus</a></li>
+<li><a href="https://grafana.com">Grafana</a></li>
+</ul> </div> </article> </section>  <div id="klaro" data-astro-cid-sckkx6r4></div> <footer class="border-t border-gray-200 "> <!-- <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+    <div>
+      <span class="font-bold text-lg">Explore</span>
+      <ul class="mt-4 space-y-2">
+        <li><a href="/about" title="About" class="hover:text-gray-400">About</a></li>
+        <li><a href="/blog" title="Blog"  class="hover:text-gray-400">Blog</a></li>
+      </ul>
+    </div>
+    
+    <div>
+      <span class="font-bold text-lg">Connect</span>
+      <ul class="mt-4 space-y-2">
+        <li><a href="/contact" title="Contact" class="hover:text-gray-400">Contact</a></li>
+      </ul>
+    </div>
+  </div> --> <!-- Bottom Section --> <div class="mt-8 pt-6 text-center text-sm gap-4"> <div class="mt-2 space-x-4"> <a href="/terms" title="Terms">Terms and Conditions</a> <a href="/privacy" title="Privacy">Privacy Policy</a> </div> <p class="mt-2">&copy; 2025 Abel Garcia. All rights reserved.</p> </div> </footer> </body></html>

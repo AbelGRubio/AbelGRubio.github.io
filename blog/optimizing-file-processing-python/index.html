@@ -1,0 +1,240 @@
+<!DOCTYPE html><html lang="en" data-astro-cid-sckkx6r4> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><!-- <meta name="generator" content={Astro.generator} /> --><link rel="canonical" href="https://agrubio.dev/blog/optimizing-file-processing-python"><script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon="{&quot;token&quot;: &quot;dd291c700634478e8e9835384fbf1a89&quot;}"></script><!-- Klaro script (CDN) --><script src="/js/klaro-config.js"></script><script defer src="https://cdn.kiprotect.com/klaro/v0.7.18/klaro.js"></script><link rel="stylesheet" href="https://cdn.kiprotect.com/klaro/v0.7.18/klaro.css"><title>Full Stack Developer | React &amp; Python Optimization Expert</title><meta name="description" content="I'm agrubio, a full stack developer focused on code optimization, refactoring, and building scalable applications using Python and React. Check out my portfolio and recent work."><meta name="keywords" content="full stack developer, Python developer, React developer, code optimization, refactoring expert, performance engineering, web development, software development, software engineer, agrubio portfolio"><meta property="og:type" content="website"><meta property="og:url" content="https://agrubio.dev"><meta property="og:title" content="Full Stack Developer | React &#38; Python Optimization Expert"><meta property="og:description" content="I'm agrubio, a full stack developer focused on code optimization, refactoring, and building scalable applications using Python and React. Check out my portfolio and recent work."><meta property="og:image" content="https://agrubio.dev/images/tenweb_media_rczvprsdi.webp"><meta property="twitter:card" content="summary_large_image"><meta property="twitter:url" content="https://agrubio.dev"><meta property="twitter:title" content="Full Stack Developer | React &#38; Python Optimization Expert"><meta property="twitter:description" content="I'm agrubio, a full stack developer focused on code optimization, refactoring, and building scalable applications using Python and React. Check out my portfolio and recent work."><meta property="twitter:image" content="https://agrubio.dev/images/tenweb_media_rczvprsdi.webp"><meta name="author" content="agrubio"><meta name="publisher" content="agrubio.dev"><meta name="robots" content="index, follow"><script type="text/plain" data-cookiecategory="analytics">
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{trackingId}}');
+
+  (function() {
+    var ga = document.createElement('script');
+    ga.src = `https://www.googletagmanager.com/gtag/js?id={{trackingId}}`;
+    ga.async = true;
+    document.head.appendChild(ga);
+  })();
+</script><script src="/js/copy-code.js"></script><link rel="stylesheet" href="/about.css"></head> <body data-astro-cid-sckkx6r4> <header class="fixed top-4 left-1/2 -translate-x-1/2 w-[90%] lg:w-[80%] z-50 transition-all duration-300 rounded-2xl "> <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between"> <div class="flex-1"> <span id="item1" class="font-bold text-2xl"> <a href="/" title="Main page">Abel Garcia </a> </span> </div> <!-- Menú para Desktop --> <nav class="hidden md:flex space-x-6" id="main-nav"> <a href="/about" title="About me"> About me </a><a href="/blog" title="Blog"> Blog </a> </nav> <!-- Botón del menú móvil --> <button onclick="toggleMenu()" id="item2" class="md:hidden text-2xl" aria-label="Toggle menu"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <line x1="3" y1="12" x2="21" y2="12"></line> <line x1="3" y1="6" x2="21" y2="6"></line> <line x1="3" y1="18" x2="21" y2="18"></line> </svg> </button> </div> <!-- Menú móvil --> <div id="mobile-menu" class="hidden lg:hidden absolute top-full left-0 w-full shadow-lg rounded-2xl py-4 flex-col items-center space-y-4 
+    "> <nav class="flex flex-col space-y-4 text-center"> <a href="/about" title="About me" onclick="toggleMenu()" class=" "> About me </a><a href="/blog" title="Blog" onclick="toggleMenu()" class=" "> Blog </a> </nav> <!-- <div class="flex flex-col items-center mt-4 space-y-2 w-full">
+      <a href='/services' class={`${isHomePage ? 'btn-h-w' : 'btn-normal-pp btn-blue-400'} w-2/4 flex flex-col items-center`} 
+      onclick="toggleMenu()">
+        Get Started
+      </a>
+      <a href='/contact' class={`${isHomePage ? 'btn-h-w2' : 'btn-normal-pp btn-blue-400-reverse'} w-2/4 flex flex-col items-center`} 
+      onclick="toggleMenu()">
+        Contact Me
+      </a>
+    </div> --> </div> </header> <script>
+  let isOpen = false;
+  
+  function toggleMenu() {
+    isOpen = !isOpen;
+    const path = window.location.pathname;
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenu.classList.toggle('hidden');
+    mobileMenu.classList.toggle('flex');
+    mobileMenu.classList.toggle('bg-white', true);
+
+  }
+
+  // Manejo del scroll
+  let isScrolled = false;
+  
+    const path = window.location.pathname;
+    const isHomePage = path === '/';
+          const item1 = document.getElementById('item1');
+   item1.classList.toggle('text-black', !isHomePage);
+   item1.classList.toggle('text-white', isHomePage);
+       const item2 = document.getElementById('item2');
+   item2.classList.toggle('text-black', !isHomePage);
+   item2.classList.toggle('text-white', isHomePage);
+        const navLinks = document.querySelectorAll('#main-nav a');
+    navLinks.forEach(link => {
+      link.classList.toggle('text-black', !isHomePage);
+      link.classList.toggle('text-white', isHomePage);
+    });
+
+
+  window.addEventListener('scroll', () => {
+    isScrolled = window.scrollY > 50;
+    const header = document.querySelector('header');
+    header.classList.toggle('scrolled', isScrolled);
+    header.classList.toggle('shadow-2xl', isScrolled);
+    header.classList.toggle('bg-white', isScrolled);
+
+
+    const path = window.location.pathname;
+    const isHomePage = path === '/';
+    if (isHomePage){
+          const item1 = document.getElementById('item1');
+    item1.classList.toggle('text-black', isScrolled);
+    item1.classList.toggle('text-white', !isScrolled);
+        const item2 = document.getElementById('item2');
+    item2.classList.toggle('text-black', isScrolled);
+    item2.classList.toggle('text-white', !isScrolled);
+    const navLinks = document.querySelectorAll('#main-nav a');
+    navLinks.forEach(link => {
+      link.classList.toggle('text-black', isScrolled);
+      link.classList.toggle('text-white', !isScrolled);
+    });
+    }
+
+  });
+</script>  <section class="mt-20 p-6"> <article class="mx-auto max-w-6xl "> <div class="prose prose-lg " id="blog"> <div class="title"> <div class="date"> <time datetime="2025-07-17T00:00:00.000Z">Jul 17, 2025</time>  </div> <h1>Optimizing File Processing in Python for High Performance</h1> <h2 class="text-lg!">Discover how to accelerate file processing in Python using benchmark-driven techniques inspired by high-performance parsers in Rust, including lazy iteration, zero-copy strategies, and multiprocessing.</h2> <hr> </div> <h2 id="introduction">Introduction</h2>
+<p>Efficient file processing is a cornerstone of building high-performance backend systems, especially when dealing with large-scale data like logs, financial transactions, or sensor streams. Inspired by a Rust-based parser that achieved dramatic speedups through strategic optimization, this post explores how to achieve similar performance gains in Python. We’ll process math expressions from a file and walk through various optimization techniques — from baseline implementations to parallel processing.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ul>
+<li><a href="#baseline-implementation-in-python">Baseline Implementation in Python</a></li>
+<li><a href="#optimization-1-avoid-unnecessary-memory-allocations">Optimization 1: Avoid Unnecessary Memory Allocations</a></li>
+<li><a href="#optimization-2-use-byte-processing-with-minimal-parsing">Optimization 2: Use Byte Processing with Minimal Parsing</a></li>
+<li><a href="#optimization-3-avoid-lookahead-with-peekable">Optimization 3: Avoid Lookahead with Peekable</a></li>
+<li><a href="#optimization-4-parallel-processing-with-multiprocessing">Optimization 4: Parallel Processing with Multiprocessing</a></li>
+<li><a href="#optimization-5-memory-mapped-file-access">Optimization 5: Memory-Mapped File Access</a></li>
+<li><a href="#conclusion">Conclusion</a></li>
+<li><a href="#whats-next">What’s Next?</a></li>
+<li><a href="#references">References</a></li>
+</ul>
+<h2 id="baseline-implementation-in-python">Baseline Implementation in Python</h2>
+<p>The base implementation reads the full file into memory, tokenizes it, and evaluates a mathematical expression line by line using recursive parsing. This naive approach is simple but not scalable.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> read_input_file</span><span style="color:#E1E4E8">(path):</span></span>
+<span class="line"><span style="color:#F97583">    with</span><span style="color:#79B8FF"> open</span><span style="color:#E1E4E8">(path, </span><span style="color:#9ECBFF">&#39;r&#39;</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">as</span><span style="color:#E1E4E8"> f:</span></span>
+<span class="line"><span style="color:#F97583">        return</span><span style="color:#E1E4E8"> f.read()</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> tokenize</span><span style="color:#E1E4E8">(expression):</span></span>
+<span class="line"><span style="color:#F97583">    for</span><span style="color:#E1E4E8"> token </span><span style="color:#F97583">in</span><span style="color:#E1E4E8"> expression.split():</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> token.isdigit():</span></span>
+<span class="line"><span style="color:#F97583">            yield</span><span style="color:#E1E4E8"> (</span><span style="color:#9ECBFF">&#39;NUMBER&#39;</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">int</span><span style="color:#E1E4E8">(token))</span></span>
+<span class="line"><span style="color:#F97583">        else</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">            yield</span><span style="color:#E1E4E8"> (token, </span><span style="color:#79B8FF">None</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> parse_expression</span><span style="color:#E1E4E8">(tokens):</span></span>
+<span class="line"><span style="color:#F97583">    def</span><span style="color:#B392F0"> parse_primary</span><span style="color:#E1E4E8">(tokens):</span></span>
+<span class="line"><span style="color:#E1E4E8">        token, value </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> next</span><span style="color:#E1E4E8">(tokens)</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> token </span><span style="color:#F97583">==</span><span style="color:#9ECBFF"> &#39;(&#39;</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">            result </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> parse_expression(tokens)</span></span>
+<span class="line"><span style="color:#79B8FF">            next</span><span style="color:#E1E4E8">(tokens)  </span><span style="color:#6A737D"># skip &#39;)&#39;</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> result</span></span>
+<span class="line"><span style="color:#F97583">        elif</span><span style="color:#E1E4E8"> token </span><span style="color:#F97583">==</span><span style="color:#9ECBFF"> &#39;NUMBER&#39;</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> value</span></span>
+<span class="line"><span style="color:#F97583">        raise</span><span style="color:#79B8FF"> ValueError</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">&quot;Unexpected token&quot;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#E1E4E8">    result </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> parse_primary(tokens)</span></span>
+<span class="line"><span style="color:#F97583">    for</span><span style="color:#E1E4E8"> token, _ </span><span style="color:#F97583">in</span><span style="color:#E1E4E8"> tokens:</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> token </span><span style="color:#F97583">==</span><span style="color:#9ECBFF"> &#39;)&#39;</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">            break</span></span>
+<span class="line"><span style="color:#E1E4E8">        right </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> parse_primary(tokens)</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> token </span><span style="color:#F97583">==</span><span style="color:#9ECBFF"> &#39;+&#39;</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">            result </span><span style="color:#F97583">+=</span><span style="color:#E1E4E8"> right</span></span>
+<span class="line"><span style="color:#F97583">        elif</span><span style="color:#E1E4E8"> token </span><span style="color:#F97583">==</span><span style="color:#9ECBFF"> &#39;-&#39;</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">            result </span><span style="color:#F97583">-=</span><span style="color:#E1E4E8"> right</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> result</span></span></code></pre>
+<h2 id="optimization-1-avoid-unnecessary-memory-allocations">Optimization 1: Avoid Unnecessary Memory Allocations</h2>
+<p>Instead of collecting tokens into a list, we use generator-based lazy evaluation to reduce memory pressure. This avoids storing large intermediate structures and processes data on-the-fly.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> tokenize_lazy</span><span style="color:#E1E4E8">(expression):</span></span>
+<span class="line"><span style="color:#F97583">    for</span><span style="color:#E1E4E8"> part </span><span style="color:#F97583">in</span><span style="color:#E1E4E8"> expression.split():</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> part.isdigit():</span></span>
+<span class="line"><span style="color:#F97583">            yield</span><span style="color:#E1E4E8"> (</span><span style="color:#9ECBFF">&#39;NUMBER&#39;</span><span style="color:#E1E4E8">, </span><span style="color:#79B8FF">int</span><span style="color:#E1E4E8">(part))</span></span>
+<span class="line"><span style="color:#F97583">        else</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">            yield</span><span style="color:#E1E4E8"> (part, </span><span style="color:#79B8FF">None</span><span style="color:#E1E4E8">)</span></span></code></pre>
+<h2 id="optimization-2-use-byte-processing-with-minimal-parsing">Optimization 2: Use Byte Processing with Minimal Parsing</h2>
+<p>Working with raw bytes can speed up processing by reducing the overhead of string manipulation. In this version, we avoid intermediate string objects entirely.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> tokenize_bytes</span><span style="color:#E1E4E8">(data):</span></span>
+<span class="line"><span style="color:#E1E4E8">    i </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span></span>
+<span class="line"><span style="color:#F97583">    while</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">&lt;</span><span style="color:#79B8FF"> len</span><span style="color:#E1E4E8">(data):</span></span>
+<span class="line"><span style="color:#E1E4E8">        byte </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> data[i]</span></span>
+<span class="line"><span style="color:#F97583">        if</span><span style="color:#E1E4E8"> byte </span><span style="color:#F97583">in</span><span style="color:#F97583"> b</span><span style="color:#9ECBFF">&#39; </span></span>
+<span class="line"><span style="color:#9ECBFF">	&#39;:</span></span>
+<span class="line"><span style="color:#E1E4E8">            i </span><span style="color:#F97583">+=</span><span style="color:#79B8FF"> 1</span></span>
+<span class="line"><span style="color:#F97583">            continue</span></span>
+<span class="line"><span style="color:#F97583">        elif</span><span style="color:#E1E4E8"> byte </span><span style="color:#F97583">in</span><span style="color:#F97583"> b</span><span style="color:#9ECBFF">&#39;+-()&#39;</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">            yield</span><span style="color:#E1E4E8"> (</span><span style="color:#79B8FF">chr</span><span style="color:#E1E4E8">(byte), </span><span style="color:#79B8FF">None</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">            i </span><span style="color:#F97583">+=</span><span style="color:#79B8FF"> 1</span></span>
+<span class="line"><span style="color:#F97583">        elif</span><span style="color:#E1E4E8"> byte </span><span style="color:#F97583">in</span><span style="color:#F97583"> b</span><span style="color:#9ECBFF">&#39;0123456789&#39;</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">            num </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> 0</span></span>
+<span class="line"><span style="color:#F97583">            while</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">&lt;</span><span style="color:#79B8FF"> len</span><span style="color:#E1E4E8">(data) </span><span style="color:#F97583">and</span><span style="color:#E1E4E8"> data[i] </span><span style="color:#F97583">in</span><span style="color:#F97583"> b</span><span style="color:#9ECBFF">&#39;0123456789&#39;</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">                num </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> num </span><span style="color:#F97583">*</span><span style="color:#79B8FF"> 10</span><span style="color:#F97583"> +</span><span style="color:#E1E4E8"> (data[i] </span><span style="color:#F97583">-</span><span style="color:#79B8FF"> 48</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#E1E4E8">                i </span><span style="color:#F97583">+=</span><span style="color:#79B8FF"> 1</span></span>
+<span class="line"><span style="color:#F97583">            yield</span><span style="color:#E1E4E8"> (</span><span style="color:#9ECBFF">&#39;NUMBER&#39;</span><span style="color:#E1E4E8">, num)</span></span></code></pre>
+<h2 id="optimization-3-avoid-lookahead-with-peekable">Optimization 3: Avoid Lookahead with Peekable</h2>
+<p>The original parser uses <code>peek()</code> to inspect tokens before consuming them. In Python, we can remove this overhead by rewriting the grammar to avoid lookahead entirely, improving iterator performance.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> parse_expression_linear</span><span style="color:#E1E4E8">(tokens):</span></span>
+<span class="line"><span style="color:#E1E4E8">    stack </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> []</span></span>
+<span class="line"><span style="color:#F97583">    try</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">        while</span><span style="color:#79B8FF"> True</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">            token, value </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> next</span><span style="color:#E1E4E8">(tokens)</span></span>
+<span class="line"><span style="color:#F97583">            if</span><span style="color:#E1E4E8"> token </span><span style="color:#F97583">==</span><span style="color:#9ECBFF"> &#39;NUMBER&#39;</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">                stack.append(value)</span></span>
+<span class="line"><span style="color:#F97583">            elif</span><span style="color:#E1E4E8"> token </span><span style="color:#F97583">in</span><span style="color:#E1E4E8"> (</span><span style="color:#9ECBFF">&#39;+&#39;</span><span style="color:#E1E4E8">, </span><span style="color:#9ECBFF">&#39;-&#39;</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#E1E4E8">                op </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> token</span></span>
+<span class="line"><span style="color:#E1E4E8">                token, value </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> next</span><span style="color:#E1E4E8">(tokens)</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> token </span><span style="color:#F97583">!=</span><span style="color:#9ECBFF"> &#39;NUMBER&#39;</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">                    raise</span><span style="color:#79B8FF"> ValueError</span><span style="color:#E1E4E8">(</span><span style="color:#9ECBFF">&quot;Expected number after operator&quot;</span><span style="color:#E1E4E8">)</span></span>
+<span class="line"><span style="color:#F97583">                if</span><span style="color:#E1E4E8"> op </span><span style="color:#F97583">==</span><span style="color:#9ECBFF"> &#39;+&#39;</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">                    stack[</span><span style="color:#F97583">-</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">+=</span><span style="color:#E1E4E8"> value</span></span>
+<span class="line"><span style="color:#F97583">                else</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#E1E4E8">                    stack[</span><span style="color:#F97583">-</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">] </span><span style="color:#F97583">-=</span><span style="color:#E1E4E8"> value</span></span>
+<span class="line"><span style="color:#F97583">            elif</span><span style="color:#E1E4E8"> token </span><span style="color:#F97583">==</span><span style="color:#9ECBFF"> &#39;)&#39;</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">                break</span></span>
+<span class="line"><span style="color:#F97583">    except</span><span style="color:#79B8FF"> StopIteration</span><span style="color:#E1E4E8">:</span></span>
+<span class="line"><span style="color:#F97583">        pass</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> stack[</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">]</span></span></code></pre>
+<h2 id="optimization-4-parallel-processing-with-multiprocessing">Optimization 4: Parallel Processing with Multiprocessing</h2>
+<p>For large files, splitting the work across multiple CPU cores can yield dramatic speedups. We split the input at top-level ’+’ operators and process each chunk in a separate process.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">from</span><span style="color:#E1E4E8"> multiprocessing </span><span style="color:#F97583">import</span><span style="color:#E1E4E8"> Pool</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> parallel_eval</span><span style="color:#E1E4E8">(input_data, num_workers</span><span style="color:#F97583">=</span><span style="color:#79B8FF">4</span><span style="color:#E1E4E8">):</span></span>
+<span class="line"><span style="color:#6A737D">    # Assume input is split safely at &#39;+&#39; outside of parentheses</span></span>
+<span class="line"><span style="color:#E1E4E8">    chunks </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> split_input_safely(input_data, num_workers)</span></span>
+<span class="line"><span style="color:#F97583">    with</span><span style="color:#E1E4E8"> Pool(num_workers) </span><span style="color:#F97583">as</span><span style="color:#E1E4E8"> pool:</span></span>
+<span class="line"><span style="color:#E1E4E8">        results </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> pool.map(eval_chunk, chunks)</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#79B8FF"> sum</span><span style="color:#E1E4E8">(results)</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> split_input_safely</span><span style="color:#E1E4E8">(data, num_chunks):</span></span>
+<span class="line"><span style="color:#6A737D">    # Simplified logic for demonstration</span></span>
+<span class="line"><span style="color:#E1E4E8">    step </span><span style="color:#F97583">=</span><span style="color:#79B8FF"> len</span><span style="color:#E1E4E8">(data) </span><span style="color:#F97583">//</span><span style="color:#E1E4E8"> num_chunks</span></span>
+<span class="line"><span style="color:#E1E4E8">    splits </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> [</span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">]</span></span>
+<span class="line"><span style="color:#F97583">    for</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">in</span><span style="color:#79B8FF"> range</span><span style="color:#E1E4E8">(</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">, num_chunks):</span></span>
+<span class="line"><span style="color:#E1E4E8">        idx </span><span style="color:#F97583">=</span><span style="color:#E1E4E8"> data.find(</span><span style="color:#F97583">b</span><span style="color:#9ECBFF">&#39;+&#39;</span><span style="color:#E1E4E8">, i </span><span style="color:#F97583">*</span><span style="color:#E1E4E8"> step)</span></span>
+<span class="line"><span style="color:#E1E4E8">        splits.append(idx </span><span style="color:#F97583">if</span><span style="color:#E1E4E8"> idx </span><span style="color:#F97583">!=</span><span style="color:#F97583"> -</span><span style="color:#79B8FF">1</span><span style="color:#F97583"> else</span><span style="color:#79B8FF"> len</span><span style="color:#E1E4E8">(data))</span></span>
+<span class="line"><span style="color:#E1E4E8">    splits.append(</span><span style="color:#79B8FF">len</span><span style="color:#E1E4E8">(data))</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> [data[splits[i]:splits[i</span><span style="color:#F97583">+</span><span style="color:#79B8FF">1</span><span style="color:#E1E4E8">]] </span><span style="color:#F97583">for</span><span style="color:#E1E4E8"> i </span><span style="color:#F97583">in</span><span style="color:#79B8FF"> range</span><span style="color:#E1E4E8">(num_chunks)]</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> eval_chunk</span><span style="color:#E1E4E8">(chunk):</span></span>
+<span class="line"><span style="color:#F97583">    return</span><span style="color:#E1E4E8"> parse_expression(tokenize_bytes(chunk))</span></span></code></pre>
+<h2 id="optimization-5-memory-mapped-file-access">Optimization 5: Memory-Mapped File Access</h2>
+<p>Using memory-mapped files (<code>mmap</code>) avoids unnecessary data copying and leverages the OS’s virtual memory features, resulting in faster I/O for large files.</p>
+<pre class="astro-code github-dark" style="background-color:#24292e;color:#e1e4e8;overflow-x:auto" tabindex="0" data-language="python"><code><span class="line"><span style="color:#F97583">import</span><span style="color:#E1E4E8"> mmap</span></span>
+<span class="line"></span>
+<span class="line"><span style="color:#F97583">def</span><span style="color:#B392F0"> mmap_input_file</span><span style="color:#E1E4E8">(path):</span></span>
+<span class="line"><span style="color:#F97583">    with</span><span style="color:#79B8FF"> open</span><span style="color:#E1E4E8">(path, </span><span style="color:#9ECBFF">&#39;rb&#39;</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">as</span><span style="color:#E1E4E8"> f:</span></span>
+<span class="line"><span style="color:#F97583">        with</span><span style="color:#E1E4E8"> mmap.mmap(f.fileno(), </span><span style="color:#79B8FF">0</span><span style="color:#E1E4E8">, </span><span style="color:#FFAB70">access</span><span style="color:#F97583">=</span><span style="color:#E1E4E8">mmap.</span><span style="color:#79B8FF">ACCESS_READ</span><span style="color:#E1E4E8">) </span><span style="color:#F97583">as</span><span style="color:#E1E4E8"> mm:</span></span>
+<span class="line"><span style="color:#F97583">            return</span><span style="color:#E1E4E8"> mm.read()</span></span></code></pre>
+<h2 id="conclusion">Conclusion</h2>
+<p>By adopting a step-by-step approach to optimizing file processing in Python, we can achieve significant performance improvements. From eliminating redundant allocations and using byte-level operations to introducing parallel processing and memory-mapping, each layer contributes to a faster and more efficient system.</p>
+<h2 id="whats-next">What’s Next?</h2>
+<p>Here are several ideas for future posts:</p>
+<ul>
+<li>Optimizing JSON parsing with simdjson and Python bindings</li>
+<li>Building a multithreaded parser with <code>asyncio</code> and <code>aiofiles</code></li>
+<li>Profiling Python applications using <code>py-spy</code> and <code>line_profiler</code></li>
+<li>Performance benchmarking: <code>timeit</code>, <code>pytest-benchmark</code>, and <code>perf</code></li>
+<li>Exploring Cython or Rust extensions for CPU-bound workloads</li>
+</ul>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://docs.python.org/3/library/mmap.html">Python mmap documentation</a></li>
+<li><a href="https://docs.python.org/3/library/multiprocessing.html">Python multiprocessing module</a></li>
+<li><a href="https://docs.rs/rayon/">Rayon in Rust</a></li>
+<li><a href="https://github.com/RPallas92/math_parser">High-Performance Rust Parser (Original)</a></li>
+</ul> </div> </article> </section>  <div id="klaro" data-astro-cid-sckkx6r4></div> <footer class="border-t border-gray-200 "> <!-- <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-4 text-center">
+    <div>
+      <span class="font-bold text-lg">Explore</span>
+      <ul class="mt-4 space-y-2">
+        <li><a href="/about" title="About" class="hover:text-gray-400">About</a></li>
+        <li><a href="/blog" title="Blog"  class="hover:text-gray-400">Blog</a></li>
+      </ul>
+    </div>
+    
+    <div>
+      <span class="font-bold text-lg">Connect</span>
+      <ul class="mt-4 space-y-2">
+        <li><a href="/contact" title="Contact" class="hover:text-gray-400">Contact</a></li>
+      </ul>
+    </div>
+  </div> --> <!-- Bottom Section --> <div class="mt-8 pt-6 text-center text-sm gap-4"> <div class="mt-2 space-x-4"> <a href="/terms" title="Terms">Terms and Conditions</a> <a href="/privacy" title="Privacy">Privacy Policy</a> </div> <p class="mt-2">&copy; 2025 Abel Garcia. All rights reserved.</p> </div> </footer> </body></html>
